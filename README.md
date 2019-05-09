@@ -9,7 +9,7 @@ Supports all versions of Dusk.
 
 ## Installation
 
-    composer require --dev staudenmeir/dusk-updater
+    composer require --dev orchestra/dusk-updater
 
 ## Usage
 
