@@ -23,7 +23,7 @@ class OperatingSystem
      */
     public static function onWindows()
     {
-        return PHP_OS === 'WINNT' || Str::contains(\php_uname(), 'Microsoft');
+        return PHP_OS === 'WINNT' || mb_strpos(\php_uname(), 'Microsoft') !== false;
     }
 
     /**

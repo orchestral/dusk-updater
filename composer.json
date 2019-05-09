@@ -18,9 +18,7 @@
         }
     },
     "require": {
-        "illuminate/console": "^5.5",
-        "illuminate/filesystem": "^5.5",
-        "illuminate/support": "^5.5"
+        "symfony/console": "^3.3 || ^4.0"
     },
     "extra": {
         "branch-alias": {

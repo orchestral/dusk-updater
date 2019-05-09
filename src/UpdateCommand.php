@@ -3,7 +3,6 @@
 namespace Orchestra\DuskUpdater;
 
 use ZipArchive;
-use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
