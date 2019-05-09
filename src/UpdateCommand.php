@@ -95,7 +95,7 @@ class UpdateCommand extends Command
         $this->setName('update')
                 ->setDescription('Install the ChromeDriver binary.')
                 ->addArgument('version', InputArgument::OPTIONAL)
-                ->addOption('dev', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
+                ->addOption('all', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
     }
 
     /**
@@ -178,7 +178,7 @@ class UpdateCommand extends Command
      * @param  string  $slug
      * @return string
      */
-    protected function download(string $version, string $slug): void
+    protected function download(string $version, string $slug): string
     {
         $url = sprintf($this->downloadUrl, $version, $slug);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Dusk;
+namespace Orchestra\DuskUpdater;
 
 use Illuminate\Support\Str;
 
