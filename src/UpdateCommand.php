@@ -81,7 +81,6 @@ class UpdateCommand extends Command
         69 => '2.44',
     ];
 
-
     /**
      * Configure the command options.
      *
@@ -122,7 +121,7 @@ class UpdateCommand extends Command
         }
 
         $output->writeln(sprintf(
-            "<info>ChromeDriver %s successfully installed for version %s.</info>", $all ? 'binaries' : 'binary', $version
+            '<info>ChromeDriver %s successfully installed for version %s.</info>', $all ? 'binaries' : 'binary', $version
         ));
     }
 
@@ -175,6 +174,7 @@ class UpdateCommand extends Command
      *
      * @param  string  $version
      * @param  string  $slug
+     *
      * @return string
      */
     protected function download(string $version, string $slug): string
@@ -193,11 +193,12 @@ class UpdateCommand extends Command
      * Extract the ChromeDriver binary from the archive and delete the archive.
      *
      * @param  string  $archive
+     *
      * @return string
      */
     protected function extract(string $archive): string
     {
-        $zip = new ZipArchive;
+        $zip = new ZipArchive();
 
         $zip->open($archive);
 
@@ -217,6 +218,7 @@ class UpdateCommand extends Command
      *
      * @param  string  $binary
      * @param  string  $os
+     *
      * @return void
      */
     protected function rename(string $binary, string $os): void

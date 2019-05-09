@@ -2,8 +2,6 @@
 
 namespace Orchestra\DuskUpdater;
 
-use Illuminate\Support\Str;
-
 class OperatingSystem
 {
     /**
