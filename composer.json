@@ -12,6 +12,11 @@
     "bin": [
         "dusk-updater"
     ],
+    "autoload": {
+        "psr-4": {
+            "Orchestra\\DuskUpdater\\": "src/"
+        }
+    },
     "require": {
         "illuminate/console": "^5.5",
         "illuminate/filesystem": "^5.5",
