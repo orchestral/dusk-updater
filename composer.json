@@ -1,0 +1,26 @@
+{
+    "name": "orchestra/dusk-updater",
+    "description": "Updater for Laravel Dusk ChromeDriver binaries",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com"
+        }
+    ],
+    "bin": [
+        "dusk-updater"
+    ],
+    "require": {
+        "illuminate/console": "^5.5",
+        "illuminate/filesystem": "^5.5",
+        "illuminate/support": "^5.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
