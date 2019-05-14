@@ -24,7 +24,7 @@
     "require": {
         "ext-openssl": "*",
         "ext-zip": "*",
-        "symfony/console": "^4.0"
+        "symfony/console": "^3.3|^3.4|^4.0"
     },
     "extra": {
         "branch-alias": {
