@@ -87,9 +87,7 @@ class UpdateCommand extends Command
      */
     protected function version(InputInterface $input): string
     {
-        $version = $input->getArgument('version');
-
-        $this->findVersionUrl($version);
+        return $this->findVersionUrl($input->getArgument('version'));
     }
 
     /**
