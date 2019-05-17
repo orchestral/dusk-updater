@@ -24,7 +24,15 @@
     "require": {
         "ext-openssl": "*",
         "ext-zip": "*",
-        "symfony/console": "^4.0"
+        "composer/semver": "^1.5",
+        "symfony/console": "^4.0",
+        "symfony/process": "^4.0"
+    },
+    "require-dev": {
+        "laravel/dusk": "^5.0"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {

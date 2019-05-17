@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class UpdateCommand extends Command
 {
-    use Concerns\ChromeVersions;
+    use Concerns\DetectsChromeVersion;
 
     /**
      * URL to the ChromeDriver download.
