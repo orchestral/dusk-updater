@@ -179,9 +179,13 @@ trait DetectsChromeVersion
      */
     protected function installedChromeDriverVersion(string $os, string $driverDirectory): array
     {
-        $filename = "chromedriver-{$os}";
+        $filenames = [
+            'linux' => 'chromedriver-linux',
+            'mac' => 'chromedriver-mac',
+            'win' => 'chromedriver-win.exe',
+        ];
 
-        $command = $driverDirectory.$filename.' --version';
+        $command = $driverDirectory.$filenames[$os].' --version';
         $process = new Process($command);
 
         $process->run();
