@@ -43,9 +43,12 @@ class UpdateCommand extends Command
     {
         $this->ignoreValidationErrors();
 
+        $directory = getcwd().'/vendor/laravel/dusk/bin/';
+
         $this->setName('update')
                 ->setDescription('Install the ChromeDriver binary.')
                 ->addArgument('version', InputArgument::OPTIONAL)
+                ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
                 ->addOption('all', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
     }
 
@@ -59,7 +62,7 @@ class UpdateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->directory = getcwd().'/vendor/laravel/dusk/bin/';
+        $this->directory = $input->getOption('install-dir');
 
         $version = $this->version($input);
         $all = $input->getOption('all');
