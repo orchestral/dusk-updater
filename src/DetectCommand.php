@@ -66,16 +66,30 @@ class DetectCommand extends Command
         if (! $updated) {
             $io->caution('ChromeDriver is outdated!');
             if ($autoUpdate || $io->confirm('Do you want to update ChromeDriver?')) {
-                $command = $this->getApplication()->find('update');
-
-                $arguments = [
-                    'command' => 'update',
-                    'version' => $chromeVersions['major'],
-                    '--install-dir' => $driverDirectory,
-                ];
-
-                $returnCode = $command->run(new ArrayInput($arguments), $output);
+                $this->updateChromeDriver($driverDirectory, $chromeVersions['major']);
             }
         }
+    }
+
+    /**
+     * Update ChromeDriver.
+     *
+     * @param \Symfony\Component\Console\Input\OutputInterface $output
+     * @param  string          $directory
+     * @param  int             $version
+     *
+     * @return int
+     */
+    protected function updateChromeDriver(OutputInterface $output, string $directory, int $version): int
+    {
+        $command = $this->getApplication()->find('update');
+
+        $arguments = [
+            'command' => 'update',
+            'version' => $version,
+            '--install-dir' => $directory,
+        ];
+
+        return $command->run(new ArrayInput($arguments), $output);
     }
 }
