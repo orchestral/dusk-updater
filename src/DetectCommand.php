@@ -2,9 +2,7 @@
 
 namespace Orchestra\DuskUpdater;
 
-use PharIo\Version\Version;
 use Composer\Semver\Comparator;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
@@ -80,8 +78,6 @@ class DetectCommand extends Command
 
                 $returnCode = $command->run(new ArrayInput($arguments), $output);
             }
-
-            //' Run `./vendor/bin/dusk-updater update '.$chromeVersions['major'].'`');
         }
     }
 }

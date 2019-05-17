@@ -185,7 +185,7 @@ trait DetectsChromeVersion
         preg_match('/ChromeDriver\s(\d+)\.(\d+)\.(\d+)(\.\d+)?\s[\w\D]+/', $process->getOutput(), $matches);
 
         if (isset($matches[1])) {
-            $semver =  implode('.', [$matches[1], $matches[2], $matches[3]]);
+            $semver = implode('.', [$matches[1], $matches[2], $matches[3]]);
 
             return [
                 'full' => $semver,
