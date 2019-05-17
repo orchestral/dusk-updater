@@ -66,7 +66,7 @@ class DetectCommand extends Command
         if (! $updated) {
             $io->caution('ChromeDriver is outdated!');
             if ($autoUpdate || $io->confirm('Do you want to update ChromeDriver?')) {
-                $this->updateChromeDriver($driverDirectory, $chromeVersions['major']);
+                $this->updateChromeDriver($output, $driverDirectory, $chromeVersions['major']);
             }
         }
     }
