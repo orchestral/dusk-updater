@@ -143,6 +143,10 @@ trait DetectsChromeVersion
 
             $process->run();
 
+            if ($process->getExitCode() != 0) {
+                continue;
+            }
+
             preg_match('/(\d+)\.(\d+)\.(\d+)(\.\d+)?/', $process->getOutput(), $matches);
 
             if (! isset($matches[1])) {
@@ -182,18 +186,20 @@ trait DetectsChromeVersion
 
         $process->run();
 
-        preg_match('/ChromeDriver\s(\d+)\.(\d+)\.(\d+)(\.\d+)?\s[\w\D]+/', $process->getOutput(), $matches);
+        if ($process->getExitCode() == 0) {
+            preg_match('/ChromeDriver\s(\d+)\.(\d+)\.(\d+)(\.\d+)?\s[\w\D]+/', $process->getOutput(), $matches);
 
-        if (isset($matches[1])) {
-            $semver = implode('.', [$matches[1], $matches[2], $matches[3]]);
+            if (isset($matches[1])) {
+                $semver = implode('.', [$matches[1], $matches[2], $matches[3]]);
 
-            return [
-                'full' => $semver,
-                'semver' => $semver,
-                'major' => (int) $matches[1],
-                'minor' => (int) $matches[2],
-                'patch' => (int) $matches[3],
-            ];
+                return [
+                    'full' => $semver,
+                    'semver' => $semver,
+                    'major' => (int) $matches[1],
+                    'minor' => (int) $matches[2],
+                    'patch' => (int) $matches[3],
+                ];
+            }
         }
 
         throw new InvalidArgumentException(
