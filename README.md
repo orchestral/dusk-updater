@@ -7,7 +7,7 @@ Updater for Laravel Dusk ChromeDriver binaries
 
 This Symfony command updates your Laravel Dusk ChromeDriver binaries to the latest or specified release.
 
-Supports all versions of Dusk.
+Supports all versions of Laravel Dusk especially used outside of Laravel installation.
 
 ## Installation
 
