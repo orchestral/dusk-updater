@@ -114,7 +114,7 @@ trait DetectsChromeVersion
     {
         $home = file_get_contents($this->homeUrl);
 
-        preg_match('/Latest stable release:.*?\?path=([\d.]+)/', $home, $matches);
+        preg_match('/chromedriver.storage.googleapis.com\/index.html\?path=([\d.]+)/', $home, $matches);
 
         return $matches[1];
     }
