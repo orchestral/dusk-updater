@@ -164,9 +164,7 @@ trait DetectsChromeVersion
             ];
         }
 
-        throw new InvalidArgumentException(
-            'Chrome version could not be detected. Please submit an issue: https://github.com/orchestral/dusk-updater'
-        );
+        throw new InvalidArgumentException('Chrome version could not be detected. Please submit an issue: https://github.com/orchestral/dusk-updater');
     }
 
     /**
@@ -206,8 +204,6 @@ trait DetectsChromeVersion
             }
         }
 
-        throw new InvalidArgumentException(
-            'ChromeDriver version could not be detected. Please submit an issue: https://github.com/orchestral/dusk-updater'
-        );
+        throw new InvalidArgumentException('ChromeDriver version could not be detected. Please submit an issue: https://github.com/orchestral/dusk-updater');
     }
 }
