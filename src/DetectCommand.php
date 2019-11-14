@@ -38,7 +38,6 @@ class DetectCommand extends Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Input\OutputInterface $output
      *
      * @return void
@@ -75,10 +74,6 @@ class DetectCommand extends Command
      * Update ChromeDriver.
      *
      * @param \Symfony\Component\Console\Input\OutputInterface $output
-     * @param  string          $directory
-     * @param  int             $version
-     *
-     * @return int
      */
     protected function updateChromeDriver(OutputInterface $output, string $directory, int $version): int
     {

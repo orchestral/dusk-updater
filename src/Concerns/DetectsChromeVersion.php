@@ -79,10 +79,6 @@ trait DetectsChromeVersion
 
     /**
      * Find selected ChromeDriver version URL.
-     *
-     * @param  string|null $version
-     *
-     * @return string
      */
     protected function findVersionUrl(?string $version): string
     {
@@ -107,8 +103,6 @@ trait DetectsChromeVersion
 
     /**
      * Get the latest stable ChromeDriver version.
-     *
-     * @return string
      */
     protected function latestVersion(): string
     {
@@ -121,10 +115,6 @@ trait DetectsChromeVersion
 
     /**
      * Detect the installed Chrome/Chromium version.
-     *
-     * @param string $operatingSystem
-     *
-     * @return array
      */
     protected function installedChromeVersion(string $operatingSystem, ?string $chromeDirectory = null): array
     {
@@ -170,10 +160,7 @@ trait DetectsChromeVersion
     /**
      * Detect the installed ChromeDriver version.
      *
-     * @param string $os
      * @param string|null $driverDirectory
-     *
-     * @return array
      */
     protected function installedChromeDriverVersion(string $os, string $driverDirectory): array
     {

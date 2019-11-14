@@ -56,7 +56,6 @@ class UpdateCommand extends Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Input\OutputInterface $output
      *
      * @return void
@@ -84,10 +83,6 @@ class UpdateCommand extends Command
 
     /**
      * Get the desired ChromeDriver version.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     *
-     * @return string
      */
     protected function version(InputInterface $input): string
     {
@@ -96,11 +91,6 @@ class UpdateCommand extends Command
 
     /**
      * Download the ChromeDriver archive.
-     *
-     * @param  string  $version
-     * @param  string  $slug
-     *
-     * @return string
      */
     protected function download(string $version, string $slug): string
     {
@@ -122,10 +112,6 @@ class UpdateCommand extends Command
 
     /**
      * Extract the ChromeDriver binary from the archive and delete the archive.
-     *
-     * @param  string  $archive
-     *
-     * @return string
      */
     protected function extract(string $archive): string
     {
@@ -146,11 +132,6 @@ class UpdateCommand extends Command
 
     /**
      * Rename the ChromeDriver binary and make it executable.
-     *
-     * @param  string  $binary
-     * @param  string  $os
-     *
-     * @return void
      */
     protected function rename(string $binary, string $os): void
     {
