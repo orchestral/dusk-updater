@@ -68,6 +68,8 @@ class DetectCommand extends Command
                 $this->updateChromeDriver($output, $driverDirectory, $chromeVersions['major']);
             }
         }
+
+        return 0;
     }
 
     /**

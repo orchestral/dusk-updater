@@ -79,6 +79,8 @@ class UpdateCommand extends Command
         $output->writeln(sprintf(
             '<info>ChromeDriver %s successfully installed for version %s.</info>', $all ? 'binaries' : 'binary', $version
         ));
+
+        return 0;
     }
 
     /**
