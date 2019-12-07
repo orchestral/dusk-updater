@@ -27,7 +27,7 @@ before_script:
 script:
   - ./vendor/bin/phpunit -c ./ --testdox --verbose
 
-  matrix:
+matrix:
   allow_failures:
     - php: 7.4
   fast_finish: true
