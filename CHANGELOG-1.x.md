@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.2.1
+
+Released: 2020-01-15
+
+### Changes
+
+* Set minimum `symfony/process` to `4.2`.
+* Only show `"ChromeDriver is outdated!"` alert when `detect` command is executed without `--auto-update` options.
+
 ## 1.2.0
 
 Released: 2019-11-28
