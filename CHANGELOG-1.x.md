@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.2.2
+
+Released: 2020-05-04
+
+### Changes
+
+* Use `PHP_OS_FAMILY` whenever possible to detect OS (available on PHP 7.2+).
+
 ## 1.2.1
 
 Released: 2020-01-15
