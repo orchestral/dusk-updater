@@ -21,7 +21,11 @@ class OperatingSystem
      */
     public static function onWindows()
     {
-        return PHP_OS === 'WINNT' || mb_strpos(\php_uname(), 'Microsoft') !== false;
+        if (\defined('PHP_OS_FAMILY')) {
+            return PHP_OS_FAMILY === 'Windows';
+        }
+
+        return PHP_OS === 'WINNT' || \mb_strpos(\php_uname(), 'Microsoft') !== false;
     }
 
     /**
@@ -31,6 +35,10 @@ class OperatingSystem
      */
     public static function onMac()
     {
+        if (\defined('PHP_OS_FAMILY')) {
+            return PHP_OS_FAMILY === 'Darwin';
+        }
+
         return PHP_OS === 'Darwin';
     }
 }
