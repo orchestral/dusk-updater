@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.2.3
+
+Released: 2020-06-05
+
+### Changes
+
+* Support for Chrome version detection on Arch Linux.
+
 ## 1.2.2
 
 Released: 2020-05-04
