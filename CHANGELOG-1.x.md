@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.2.4
+
+Released: 2020-10-30
+
+### Changes
+
+* Support `composer/semver` version 3.
+
 ## 1.2.3
 
 Released: 2020-06-05
