@@ -8,12 +8,10 @@ on:
 
 jobs:
   tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: "ubuntu-latest"
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        os:
-          - "ubuntu-latest"
         php:
           - "7.1"
           - "7.2"
@@ -31,7 +29,7 @@ jobs:
             composer-options: "--ignore-platform-reqs"
             experimental: true
 
-    name: PHP${{ matrix.php }} on ${{ matrix.os }} (${{ matrix.dependencies }})
+    name: PHP${{ matrix.php }} on ubuntu-latest (${{ matrix.dependencies }})
 
     steps:
       - name: Checkout code
@@ -41,7 +39,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.composer/cache/files
-          key: dependencies-${{ matrix.php }}-${{ matrix.os }}-${{ matrix.dependencies }}-composer-${{ hashFiles('composer.json') }}
+          key: dependencies-${{ matrix.php }}-ubuntu-latest-${{ matrix.dependencies }}-composer-${{ hashFiles('composer.json') }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
