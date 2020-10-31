@@ -1,7 +1,7 @@
 Updater for Laravel Dusk ChromeDriver binaries
 ==============
 
-[![Build Status](https://travis-ci.org/orchestral/dusk-updater.svg?branch=master)](https://travis-ci.org/orchestral/dusk-updater)
+[![tests](https://github.com/orchestral/dusk-updater/workflows/tests/badge.svg?branch=master)](https://github.com/orchestral/dusk-updater/actions?query=branch%3Amaster+workflow%3Atests)
 [![Latest Stable Version](https://poser.pugx.org/orchestra/dusk-updater/version)](https://packagist.org/packages/orchestra/dusk-updater)
 [![Total Downloads](https://poser.pugx.org/orchestra/dusk-updater/downloads)](https://packagist.org/packages/orchestra/dusk-updater)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/dusk-updater/v/unstable)](//packagist.org/packages/orchestra/dusk-updater)
