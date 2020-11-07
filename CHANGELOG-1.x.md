@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.3.0
+
+Released: 2020-11-07
+
+### Changes
+
+* Draft support for PHP 8.
+* Get version directly from Composer.
+
 ## 1.2.4
 
 Released: 2020-10-30
