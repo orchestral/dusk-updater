@@ -7,7 +7,10 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
     require __DIR__.'/../../autoload.php';
 }
 
-$app = new Symfony\Component\Console\Application('Dusk Updater', '1.1.1');
+$manifest = json_decode(file_get_contents(__DIR__.'/composer.json'), true);
+
+$app = new Symfony\Component\Console\Application('Dusk Updater', $manifest['version'] ?? '1.x-dev');
+
 $app->add(new Orchestra\DuskUpdater\DetectCommand());
 $app->add(new Orchestra\DuskUpdater\UpdateCommand());
 
