@@ -17,17 +17,13 @@ jobs:
           - "7.2"
           - "7.3"
           - "7.4"
+          - "8.0"
         dependencies:
           - "locked"
           - "lowest"
           - "highest"
         experimental:
           - false
-        include:
-          - php: "8.0"
-            dependencies: "highest"
-            composer-options: "--ignore-platform-reqs"
-            experimental: true
 
     name: PHP${{ matrix.php }} on ubuntu-latest (${{ matrix.dependencies }})
 
@@ -45,6 +41,7 @@ jobs:
       - name: Install dependencies
         uses: "ramsey/composer-install@v1"
         with:
+          dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
       - name: Execute tests
         run: vendor/bin/phpunit
