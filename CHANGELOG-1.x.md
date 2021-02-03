@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.3.1
+
+Released: 2021-02-03
+
+### Added
+
+* Added Chromium path for Debian 10.
+
 ## 1.3.0
 
 Released: 2020-11-07
