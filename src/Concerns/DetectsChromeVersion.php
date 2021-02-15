@@ -25,6 +25,12 @@ trait DetectsChromeVersion
         'mac' => [
             '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
         ],
+        'mac-intel' => [
+            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
+        ],
+        'mac-arm' => [
+            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
+        ],
         'win' => [
             'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
         ],
@@ -163,14 +169,28 @@ trait DetectsChromeVersion
      * Detect the installed ChromeDriver version.
      *
      * @param string|null $driverDirectory
+     *
+     * @return array|null
      */
-    protected function installedChromeDriverVersion(string $os, string $driverDirectory): array
+    protected function installedChromeDriverVersion(string $os, string $driverDirectory)
     {
         $filenames = [
             'linux' => 'chromedriver-linux',
             'mac' => 'chromedriver-mac',
+            'mac-intel' => 'chromedriver-mac-intel',
+            'mac-arm' => 'chromedriver-mac-arm',
             'win' => 'chromedriver-win.exe',
         ];
+
+        if (! file_exists($driverDirectory.$filenames[$os])) {
+            return [
+                'full' => null,
+                'semver' => null,
+                'major' => null,
+                'minor' => null,
+                'patch' => null,
+            ];
+        }
 
         $command = $driverDirectory.$filenames[$os].' --version';
         $process = Process::fromShellCommandline($command);

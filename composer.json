@@ -25,20 +25,20 @@
         "ext-openssl": "*",
         "ext-zip": "*",
         "composer/semver": "^1.5 || ^3.0",
-        "laravel/dusk": "^6.12",
         "symfony/console": "^4.0 || ^5.0",
         "symfony/process": "^4.2 || ^5.0",
         "symfony/polyfill-ctype": "^1.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4 || ^9.0"
+        "laravel/dusk": "^4.0 || ^5.0 || ^6.0",
+        "phpunit/phpunit": "^7.5 || ^8.4 || ^9.0"
     },
     "config": {
         "sort-packages": true
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "1.4-dev"
         }
     },
     "minimum-stability": "dev"
