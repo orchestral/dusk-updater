@@ -41,5 +41,6 @@
             "dev-master": "1.4-dev"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "version": "v1.4.0"
 }

@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.4.0
+
+Released: 2021-02-15
+
+### Added
+
+* Add ability to split Mac architecture `intel` and `arm64` for ChromeDriver.
+* Add ability to detect if ChromeDriver isn't available in Laravel Dusk.
+
 ## 1.3.1
 
 Released: 2021-02-03
