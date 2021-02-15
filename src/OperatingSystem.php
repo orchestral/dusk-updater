@@ -11,7 +11,13 @@ class OperatingSystem
      */
     public static function id()
     {
-        return static::onWindows() ? 'win' : (static::onMac() ? 'mac' : 'linux');
+        if (static::onWindows()) {
+            return 'win';
+        } elseif (static::onMac()) {
+            return static::macArchitecture();
+        }
+
+        return 'linux';
     }
 
     /**
@@ -40,5 +46,21 @@ class OperatingSystem
         }
 
         return PHP_OS === 'Darwin';
+    }
+
+    /**
+     * Mac platform architecture.
+     *
+     * @return string
+     */
+    public static function macArchitecture()
+    {
+        switch (php_uname('m')) {
+            case 'arm64':
+                return 'mac-arm';
+            case 'x86_64':
+            default:
+                return 'mac-intel';
+        }
     }
 }
