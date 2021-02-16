@@ -31,6 +31,7 @@ class UpdateCommand extends Command
      */
     protected $slugs = [
         'linux' => 'linux64',
+        'mac' => 'mac64',
         'mac-intel' => 'mac64',
         'mac-arm' => 'mac64_m1',
         'win' => 'win32',

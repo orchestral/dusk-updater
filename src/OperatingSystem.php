@@ -59,8 +59,9 @@ class OperatingSystem
             case 'arm64':
                 return 'mac-arm';
             case 'x86_64':
-            default:
                 return 'mac-intel';
+            default:
+                return 'mac';
         }
     }
 }
