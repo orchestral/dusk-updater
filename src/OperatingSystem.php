@@ -14,7 +14,7 @@ class OperatingSystem
         if (static::onWindows()) {
             return 'win';
         } elseif (static::onMac()) {
-            return static::macArchitecture();
+            return static::macArchitectureId();
         }
 
         return 'linux';
@@ -49,11 +49,11 @@ class OperatingSystem
     }
 
     /**
-     * Mac platform architecture.
+     * Mac platform architecture ID.
      *
      * @return string
      */
-    public static function macArchitecture()
+    public static function macArchitectureId()
     {
         switch (php_uname('m')) {
             case 'arm64':
@@ -63,5 +63,18 @@ class OperatingSystem
             default:
                 return 'mac';
         }
+    }
+
+    /**
+     * Mac platform architecture ID.
+     *
+     * @return string
+     *
+     * @deprecated v1.4.x
+     * @see static::macArchitectureId()
+     */
+    public static function macArchitecture()
+    {
+        return static::macArchitectureId();
     }
 }
