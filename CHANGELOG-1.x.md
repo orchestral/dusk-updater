@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.4.1
+
+Released: 2021-02-16
+
+### Changes
+
+* Allow fallback to `mac` if it doesn't match `x86_64` or `arm64` validation.
+
 ## 1.4.0
 
 Released: 2021-02-15
