@@ -7,8 +7,6 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
     require __DIR__.'/../../autoload.php';
 }
 
-$manifest = json_decode(file_get_contents(__DIR__.'/composer.json'), true);
-
 $app = new Symfony\Component\Console\Application(
     'Dusk Updater', Composer\InstalledVersions::getPrettyVersion('orchestra/dusk-updater')
 );
