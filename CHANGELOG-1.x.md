@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.4.2
+
+Released: 2021-03-13
+
+### Changes
+
+* Uses `Composer\InstalledVersions::getPrettyVersion()` to get current version.
+
 ## 1.4.1
 
 Released: 2021-02-16
