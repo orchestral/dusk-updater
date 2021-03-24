@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.4.3
+
+Released: 2021-03-24
+
+### Changes
+
+* Don't display current version number when using Composer 1.
+
 ## 1.4.2
 
 Released: 2021-03-13
