@@ -25,15 +25,15 @@ Supports all versions of Laravel Dusk especially used outside of Laravel install
 
 Download the latest stable ChromeDriver release:
 
-    composer exec dusk-updater update
+    ./vendor/bin/dusk-updater update
 
 You can also specify the major Chrome/Chromium version you are using:
 
-    composer exec dusk-updater update 74
+    ./vendor/bin/dusk-updater update 74
 
 Or you directly specify the desired ChromeDriver version:
 
-    composer exec dusk-updater update 74.0.3729.6
+    ./vendor/bin/dusk-updater update 74.0.3729.6
 
 > If Dusk is still using the previous version after the update, there is probably an old ChromeDriver process running that you need to terminate first. 
 
@@ -41,7 +41,7 @@ Or you directly specify the desired ChromeDriver version:
 
 You can check if the installed Chrome and ChromeDriver version using:
 
-    composer exec dusk-updater detect
+    ./vendor/bin/dusk-updater detect
 
 > The command will prompt you to download new ChromeDriver if it is outdated.
 
