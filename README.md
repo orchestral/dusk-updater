@@ -47,8 +47,8 @@ You can check if the installed Chrome and ChromeDriver version using:
 
 Specify the absolute path to your custom Chrome/Chromium installation (not supported on Windows):
 
-    composer exec dusk-updater detect --chrome-dir=/usr/bin/google-chrome
+    ./vendor/bin/dusk-updater detect --chrome-dir=/usr/bin/google-chrome
 
 Finally, you can also tell the command to automatically downlad new version if it is outdated using:
 
-    composer exec dusk-updater detect --auto-update
+    ./vendor/bin/dusk-updater detect --auto-update
