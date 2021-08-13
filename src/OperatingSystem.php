@@ -64,17 +64,4 @@ class OperatingSystem
                 return 'mac';
         }
     }
-
-    /**
-     * Mac platform architecture ID.
-     *
-     * @return string
-     *
-     * @deprecated v1.4.x
-     * @see static::macArchitectureId()
-     */
-    public static function macArchitecture()
-    {
-        return static::macArchitectureId();
-    }
 }
