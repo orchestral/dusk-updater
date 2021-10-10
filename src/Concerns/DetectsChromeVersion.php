@@ -13,7 +13,7 @@ trait DetectsChromeVersion
     /**
      * The default commands to detect the installed Chrome/Chromium version.
      *
-     * @var array
+     * @var array<string, array>
      */
     protected $chromeCommands = [
         'linux' => [
@@ -53,7 +53,7 @@ trait DetectsChromeVersion
     /**
      * The legacy versions for the ChromeDriver.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $legacyVersions = [
         43 => '2.20',
@@ -123,6 +123,8 @@ trait DetectsChromeVersion
 
     /**
      * Detect the installed Chrome/Chromium version.
+     *
+     * @return array<string, mixed>
      */
     protected function installedChromeVersion(string $operatingSystem, ?string $chromeDirectory = null): array
     {
@@ -170,7 +172,7 @@ trait DetectsChromeVersion
      *
      * @param string|null $driverDirectory
      *
-     * @return array|null
+     * @return array<string, mixed>|null
      */
     protected function installedChromeDriverVersion(string $os, string $driverDirectory)
     {

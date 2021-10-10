@@ -27,7 +27,7 @@ class UpdateCommand extends Command
     /**
      * Download slugs for the available operating systems.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $slugs = [
         'linux' => 'linux64',
@@ -58,7 +58,7 @@ class UpdateCommand extends Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\OutputInterface $output
+     * @param \Symfony\Component\Console\Input\OutputInterface  $output
      *
      * @return int 0 if everything went fine, or an exit code
      */

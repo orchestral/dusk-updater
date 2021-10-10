@@ -38,9 +38,7 @@ class DetectCommand extends Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\OutputInterface $output
-     *
-     * @return int 0 if everything went fine, or an exit code
+     * @return int 0
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -72,7 +70,7 @@ class DetectCommand extends Command
             }
         }
 
-        return 0;
+        return self::SUCCESS;
     }
 
     /**
