@@ -55,7 +55,7 @@ class DetectCommand extends Command
         $chromeVersions = $this->installedChromeVersion($currentOS, $chromeDirectory);
         $driverVersions = $this->installedChromeDriverVersion($currentOS, $driverDirectory);
 
-        $updated = Comparator::equalTo($driverVersions['semver'], $chromeVersions['semver']);
+        $updated = Comparator::equalTo($driverVersions['semver'] ?? '', $chromeVersions['semver'] ?? '');
 
         $io->table(['Tool', 'Version'], [
             ['Chrome/Chromium', $chromeVersions['semver'] ?? '<fg=yellow>✖ N/A</>'],
