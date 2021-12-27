@@ -13,7 +13,7 @@ trait DetectsChromeVersion
     /**
      * The default commands to detect the installed Chrome/Chromium version.
      *
-     * @var array<string, array>
+     * @var array<string, array<int, string>>
      */
     protected $chromeCommands = [
         'linux' => [

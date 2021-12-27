@@ -82,7 +82,7 @@ class UpdateCommand extends Command
             '<info>ChromeDriver %s successfully installed for version %s.</info>', $all ? 'binaries' : 'binary', $version
         ));
 
-        return 0;
+        return self::SUCCESS;
     }
 
     /**
