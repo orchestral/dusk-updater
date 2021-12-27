@@ -2,6 +2,22 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.5.1
+
+Released: 2021-12-27
+
+### Changes
+
+* Support for Symfony 6.
+
+## 1.5.0
+
+Released: 2021-10-24
+
+### Added
+
+* Added support for PHP 8.1.
+
 ## 1.4.3
 
 Released: 2021-03-24
