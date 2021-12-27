@@ -78,12 +78,13 @@ class DetectCommand extends Command
 
     /**
      * Update ChromeDriver.
-     *
-     * @param \Symfony\Component\Console\Input\OutputInterface $output
      */
     protected function updateChromeDriver(OutputInterface $output, string $directory, int $version): int
     {
-        $command = $this->getApplication()->find('update');
+        /** @var \Symfony\Component\Console\Application $console */
+        $console = $this->getApplication();
+
+        $command = $console->find('update');
 
         $arguments = [
             'command' => 'update',

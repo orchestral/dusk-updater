@@ -104,7 +104,7 @@ trait DetectsChromeVersion
             return $this->legacyVersions[$version];
         }
 
-        return trim(file_get_contents(
+        return trim((string) file_get_contents(
             sprintf($this->versionUrl, $version)
         ));
     }
@@ -114,7 +114,7 @@ trait DetectsChromeVersion
      */
     protected function latestVersion(): string
     {
-        $home = file_get_contents($this->homeUrl);
+        $home = (string) file_get_contents($this->homeUrl);
 
         preg_match('/chromedriver.storage.googleapis.com\/index.html\?path=([\d.]+)/', $home, $matches);
 
@@ -170,11 +170,9 @@ trait DetectsChromeVersion
     /**
      * Detect the installed ChromeDriver version.
      *
-     * @param string|null $driverDirectory
-     *
      * @return array<string, mixed>|null
      */
-    protected function installedChromeDriverVersion(string $os, string $driverDirectory)
+    protected function installedChromeDriverVersion(string $os, ?string $driverDirectory)
     {
         $filenames = [
             'linux' => 'chromedriver-linux',

@@ -38,6 +38,13 @@ class UpdateCommand extends Command
     ];
 
     /**
+     * The ChromeDriver binary installation directory.
+     *
+     * @var string
+     */
+    protected $directory;
+
+    /**
      * Configure the command options.
      *
      * @return void
@@ -57,8 +64,6 @@ class UpdateCommand extends Command
 
     /**
      * Execute the command.
-     *
-     * @param \Symfony\Component\Console\Input\OutputInterface  $output
      *
      * @return int 0 if everything went fine, or an exit code
      */
@@ -131,7 +136,7 @@ class UpdateCommand extends Command
 
         unlink($archive);
 
-        return $binary;
+        return (string) $binary;
     }
 
     /**
