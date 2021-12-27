@@ -38,8 +38,6 @@ class DetectCommand extends Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\OutputInterface $output
-     *
      * @return int 0 if everything went fine, or an exit code
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -56,7 +54,7 @@ class DetectCommand extends Command
         $driverVersions = $this->installedChromeDriverVersion($currentOS, $driverDirectory);
 
         $updated = Comparator::equalTo(
-            isset($driverVersions['semver']) ? $driverVersions['semver'] : '', 
+            isset($driverVersions['semver']) ? $driverVersions['semver'] : '',
             isset($chromeVersions['semver']) ? $chromeVersions['semver'] : ''
         );
 
