@@ -18,6 +18,10 @@ jobs:
           - "lowest"
         experimental:
           - false
+        include:
+          - php: 8.2
+            dependencies: "highest"
+            experimental: true
 
     name: PHP${{ matrix.php }} on ubuntu-latest (${{ matrix.dependencies }})
 
@@ -37,5 +41,9 @@ jobs:
         with:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
+
+      - name: Installed dependencies
+        run: composer show -D
+
       - name: Execute tests
         run: vendor/bin/phpunit

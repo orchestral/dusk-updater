@@ -32,9 +32,14 @@
         "symfony/process": "^5.0 || ^6.0"
     },
     "require-dev": {
+<<<<<<< HEAD
         "laravel/dusk": "^6.0",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^8.5.21 || ^9.5.10"
+=======
+        "laravel/dusk": "^4.0 || ^5.0 || ^6.0 || ^7.0",
+        "phpunit/phpunit": "^7.5 || ^8.5.21 || ^9.5.10"
+>>>>>>> 1.x
     },
     "config": {
         "sort-packages": true
@@ -44,5 +49,6 @@
             "dev-master": "2.0-dev"
         }
     },
+    "prefer-stable": true,
     "minimum-stability": "dev"
 }
