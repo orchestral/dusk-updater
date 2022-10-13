@@ -96,6 +96,10 @@ class UpdateCommand extends Command
      */
     protected function download(string $version, string $slug): string
     {
+        if (version_compare($version, '106.0.5249', '>=') && $slug == 'mac64_m1') {
+            $slug == 'mac_arm64';
+        }
+
         $url = sprintf($this->downloadUrl, $version, $slug);
 
         file_put_contents(
