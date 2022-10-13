@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+
+## 1.5.2
+
+Released: 2021-12-27
+
+### Fixes
+
+* Fixes error retrieving ChromeDriver on M1 Mac for version 106.x.
+
 ## 1.5.1
 
 Released: 2021-12-27

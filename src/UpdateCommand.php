@@ -33,7 +33,7 @@ class UpdateCommand extends Command
         'linux' => 'linux64',
         'mac' => 'mac64',
         'mac-intel' => 'mac64',
-        'mac-arm' => 'mac64_m1',
+        'mac-arm' => 'mac_arm64',
         'win' => 'win32',
     ];
 
@@ -96,8 +96,8 @@ class UpdateCommand extends Command
      */
     protected function download(string $version, string $slug): string
     {
-        if (version_compare($version, '106.0.5249', '>=') && $slug == 'mac64_m1') {
-            $slug == 'mac_arm64';
+        if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
+            $slug == 'mac64_m1';
         }
 
         $url = sprintf($this->downloadUrl, $version, $slug);
