@@ -33,6 +33,7 @@
     },
     "require-dev": {
         "laravel/dusk": "^7.0",
+        "laravel/pint": "^1.1",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^9.5.10"
     },
