@@ -147,6 +147,8 @@ class UpdateCommand extends Command
 
     /**
      * Rename the ChromeDriver binary and make it executable.
+     *
+     * @throws \RuntimeException
      */
     protected function rename(string $binary, string $os): void
     {
