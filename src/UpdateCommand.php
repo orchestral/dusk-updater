@@ -126,7 +126,7 @@ class UpdateCommand extends Command
      */
     protected function extract(string $archive): string
     {
-        if (is_null($this->directory)) {
+        if (\is_null($this->directory)) {
             throw new RuntimeException("Unable to extract {$archive} without --install-dir");
         }
 
@@ -152,7 +152,7 @@ class UpdateCommand extends Command
      */
     protected function rename(string $binary, string $os): void
     {
-        if (is_null($this->directory)) {
+        if (\is_null($this->directory)) {
             throw new RuntimeException("Unable to rename {$binary} without --install-dir");
         }
 
