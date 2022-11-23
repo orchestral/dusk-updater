@@ -5,10 +5,10 @@ namespace Orchestra\DuskUpdater;
 use Composer\Semver\Comparator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
@@ -19,10 +19,8 @@ class DetectCommand extends Command
 
     /**
      * Configure the command options.
-     *
-     * @return void
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->ignoreValidationErrors();
 
@@ -40,7 +38,7 @@ class DetectCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 

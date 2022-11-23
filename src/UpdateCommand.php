@@ -2,13 +2,13 @@
 
 namespace Orchestra\DuskUpdater;
 
-use ZipArchive;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use ZipArchive;
 
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
@@ -19,17 +19,15 @@ class UpdateCommand extends Command
 
     /**
      * URL to the ChromeDriver download.
-     *
-     * @var string
      */
-    protected $downloadUrl = 'https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip';
+    protected string $downloadUrl = 'https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip';
 
     /**
      * Download slugs for the available operating systems.
      *
      * @var array<string, string>
      */
-    protected $slugs = [
+    protected array $slugs = [
         'linux' => 'linux64',
         'mac' => 'mac64',
         'mac-intel' => 'mac64',
@@ -39,17 +37,13 @@ class UpdateCommand extends Command
 
     /**
      * The ChromeDriver binary installation directory.
-     *
-     * @var string
      */
-    protected $directory;
+    protected ?string $directory;
 
     /**
      * Configure the command options.
-     *
-     * @return void
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->ignoreValidationErrors();
 
@@ -67,7 +61,7 @@ class UpdateCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->directory = $input->getOption('install-dir');
 
@@ -114,7 +108,7 @@ class UpdateCommand extends Command
             $resource = @fopen($url, 'r')
         );
 
-        if (! is_resource($resource) || ! file_exists($archive)) {
+        if (! \is_resource($resource) || ! file_exists($archive)) {
             throw new RuntimeException("Unable to retrieve ChromeDriver [{$version}].");
         } else {
             fclose($resource);
@@ -146,7 +140,7 @@ class UpdateCommand extends Command
     /**
      * Rename the ChromeDriver binary and make it executable.
      */
-    protected function rename(string $binary, string $os): void
+    protected function rename(string $binary, string $os): never
     {
         $newName = str_replace('chromedriver', 'chromedriver-'.$os, $binary);
 
