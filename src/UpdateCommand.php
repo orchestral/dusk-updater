@@ -94,6 +94,8 @@ class UpdateCommand extends Command
 
     /**
      * Download the ChromeDriver archive.
+     *
+     * @throws \RuntimeException
      */
     protected function download(string $version, string $slug): string
     {
@@ -119,9 +121,15 @@ class UpdateCommand extends Command
 
     /**
      * Extract the ChromeDriver binary from the archive and delete the archive.
+     *
+     * @throws \RuntimeException
      */
     protected function extract(string $archive): string
     {
+        if (is_null($this->directory)) {
+            throw new RuntimeException("Unable to extract {$archive} without --install-dir");
+        }
+
         $zip = new ZipArchive();
 
         $zip->open($archive);
@@ -140,8 +148,12 @@ class UpdateCommand extends Command
     /**
      * Rename the ChromeDriver binary and make it executable.
      */
-    protected function rename(string $binary, string $os): never
+    protected function rename(string $binary, string $os): void
     {
+        if (is_null($this->directory)) {
+            throw new RuntimeException("Unable to rename {$binary} without --install-dir");
+        }
+
         $newName = str_replace('chromedriver', 'chromedriver-'.$os, $binary);
 
         rename($this->directory.$binary, $this->directory.$newName);
