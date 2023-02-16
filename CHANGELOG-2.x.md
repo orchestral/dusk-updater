@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.0.1
+
+Released: 2023-02-16
+
+### Changes
+
+* Use `$_composer_autoload_path` when available.
+
 ## 2.0.0
 
 Released: 2023-02-14
