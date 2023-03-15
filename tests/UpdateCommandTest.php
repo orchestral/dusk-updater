@@ -20,11 +20,11 @@ class UpdateCommandTest extends TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'command' => $command->getName(),
-            'version' => '73.0.3683.68',
+            'version' => '108.0.5359.71',
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertStringContainsString("ChromeDriver binary successfully installed for version 73.0.3683.68.\n", $output);
+        $this->assertStringContainsString("ChromeDriver binary successfully installed for version 108.0.5359.71.\n", $output);
     }
 
     /** @test */
@@ -38,11 +38,11 @@ class UpdateCommandTest extends TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'command' => $command->getName(),
-            'version' => '74',
+            'version' => '108',
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertStringContainsString("ChromeDriver binary successfully installed for version 74", $output);
+        $this->assertStringContainsString("ChromeDriver binary successfully installed for version 108", $output);
     }
 
     /** @test */

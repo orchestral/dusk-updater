@@ -41,5 +41,8 @@
             "dev-master": "2.0-dev"
         }
     },
+    "scripts": {
+        "test": "@php vendor/bin/phpunit -c ./ --color"
+    },
     "minimum-stability": "stable"
 }
