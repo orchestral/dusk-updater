@@ -15,7 +15,7 @@ trait DetectsChromeVersion
      *
      * @var array<string, array<int, string>>
      */
-    protected $chromeCommands = [
+    protected array $chromeCommands = [
         'linux' => [
             '/usr/bin/google-chrome --version',
             '/usr/bin/chromium-browser --version',
@@ -38,24 +38,20 @@ trait DetectsChromeVersion
 
     /**
      * URL to the home page.
-     *
-     * @var string
      */
-    protected $homeUrl = 'http://chromedriver.chromium.org/home';
+    protected string $homeUrl = 'http://chromedriver.chromium.org/home';
 
     /**
      * URL to the latest release version.
-     *
-     * @var string
      */
-    protected $versionUrl = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d';
+    protected string $versionUrl = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d';
 
     /**
      * The legacy versions for the ChromeDriver.
      *
      * @var array<int, string>
      */
-    protected $legacyVersions = [
+    protected array $legacyVersions = [
         43 => '2.20',
         44 => '2.20',
         45 => '2.20',
