@@ -27,10 +27,10 @@ class DetectCommand extends Command
         $directory = getcwd().'/vendor/laravel/dusk/bin/';
 
         $this->setName('detect')
-                ->setDescription('Detect the installed Chrome/Chromium version.')
-                ->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
-                ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
-                ->addOption('auto-update', null, InputOption::VALUE_NONE, 'Auto update ChromeDriver binary if outdated');
+            ->setDescription('Detect the installed Chrome/Chromium version.')
+            ->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
+            ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
+            ->addOption('auto-update', null, InputOption::VALUE_NONE, 'Auto update ChromeDriver binary if outdated');
     }
 
     /**

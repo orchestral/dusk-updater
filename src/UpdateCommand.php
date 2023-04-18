@@ -50,10 +50,10 @@ class UpdateCommand extends Command
         $directory = getcwd().'/vendor/laravel/dusk/bin/';
 
         $this->setName('update')
-                ->setDescription('Install the ChromeDriver binary.')
-                ->addArgument('version', InputArgument::OPTIONAL)
-                ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
-                ->addOption('all', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
+            ->setDescription('Install the ChromeDriver binary.')
+            ->addArgument('version', InputArgument::OPTIONAL)
+            ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
+            ->addOption('all', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
     }
 
     /**
