@@ -88,7 +88,7 @@ trait DetectsChromeVersion
             return $this->latestVersion();
         }
 
-        if (! ctype_digit($version)) {
+        if (! ctype_digit((string) $version)) {
             return $version;
         }
 
