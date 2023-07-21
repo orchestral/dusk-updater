@@ -95,7 +95,7 @@ class Command extends SymfonyCommand
      */
     protected function resolveDownloadUrl(string $version, string $slug): string
     {
-        if (version_compare($version, '113.0', '<')) {
+        if (version_compare($version, '115.0', '<')) {
             if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
                 $slug == 'mac64_m1';
             }
