@@ -1,17 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-if (file_exists(__DIR__.'/vendor/autoload.php')) {
-    require __DIR__.'/vendor/autoload.php';
-} else {
-    require __DIR__.'/../../autoload.php';
-}
+require $_composer_autoload_path ?? __DIR__.'/vendor/autoload.php';
 
 $app = new Symfony\Component\Console\Application('Dusk Updater');
 
-if (class_exists(Composer\InstalledVersions::class)) {
-    $app->setVersion(Composer\InstalledVersions::getPrettyVersion('orchestra/dusk-updater'));
-}
+$app->setVersion(Composer\InstalledVersions::getPrettyVersion('orchestra/dusk-updater'));
 
 $app->add(new Orchestra\DuskUpdater\DetectCommand());
 $app->add(new Orchestra\DuskUpdater\UpdateCommand());
