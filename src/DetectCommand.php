@@ -61,7 +61,7 @@ class DetectCommand extends Command
             }
 
             if ($autoUpdate || $io->confirm('Do you want to update ChromeDriver?')) {
-                $this->updateChromeDriver($output, $driverDirectory, $chromeVersions['major']);
+                $this->updateChromeDriver($input, $output, $driverDirectory, $chromeVersions['major']);
             }
         }
 
@@ -71,18 +71,21 @@ class DetectCommand extends Command
     /**
      * Update ChromeDriver.
      */
-    protected function updateChromeDriver(OutputInterface $output, string $directory, int $version): int
+    protected function updateChromeDriver(InputInterface $input, OutputInterface $output, string $directory, int $version): int
     {
         /** @var \Symfony\Component\Console\Application $console */
         $console = $this->getApplication();
 
         $command = $console->find('update');
 
-        $arguments = [
+        $arguments = array_merge([
             'command' => 'update',
             'version' => $version,
             '--install-dir' => $directory,
-        ];
+        ], array_filter([
+            '--proxy' => $input->getOption('proxy'),
+            '--ssl-no-verify' => $input->getOption('ssl-no-verify'),
+        ]));
 
         return $command->run(new ArrayInput($arguments), $output);
     }

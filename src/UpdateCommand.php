@@ -134,9 +134,7 @@ class UpdateCommand extends Command
             throw new RuntimeException("Unable to rename {$binary} without --install-dir");
         }
 
-        $newName = strpos($binary, DIRECTORY_SEPARATOR) >= 0
-            ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$os, $binary), 2))[0]
-            : str_replace('chromedriver', 'chromedriver-'.$os, $binary);
+        $newName = chromedriver_binary_filename($binary, $os);
 
         rename($this->directory.$binary, $this->directory.$newName);
 
