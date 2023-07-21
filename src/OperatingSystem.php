@@ -12,7 +12,7 @@ class OperatingSystem
     public static function id()
     {
         if (static::onWindows()) {
-            return \defined('PHP_INT_SIZE') && PHP_INT_SIZE === 8 ? 'win64' : 'win';
+            return 'win';
         } elseif (static::onMac()) {
             return static::macArchitectureId();
         }
