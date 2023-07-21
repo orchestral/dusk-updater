@@ -2,6 +2,7 @@
 
 namespace Orchestra\DuskUpdater;
 
+use Exception;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -84,15 +85,13 @@ class UpdateCommand extends Command
     {
         $url = $this->resolveDownloadUrl($version, $slug);
 
-        file_put_contents(
-            $archive = $this->directory.'chromedriver.zip',
-            $resource = @fopen($url, 'r')
-        );
-
-        if (! \is_resource($resource) || ! file_exists($archive)) {
+        try {
+            file_put_contents(
+                $archive = $this->directory.'chromedriver.zip',
+                $this->fetchUrl($url)
+            );
+        } catch (Exception $e) {
             throw new RuntimeException("Unable to retrieve ChromeDriver [{$version}].");
-        } else {
-            fclose($resource);
         }
 
         return $archive;

@@ -83,7 +83,7 @@ class Command extends SymfonyCommand
             $streamOptions['http'] = ['proxy' => $this->httpProxy, 'request_fulluri' => true];
         }
 
-        $contents = file_get_contents($url, false, stream_context_create($streamOptions));
+        $contents = @file_get_contents($url, false, stream_context_create($streamOptions));
 
         return \is_string($contents) ? $contents : throw new Exception("Unable to fetch contents from [{$url}]");
     }
