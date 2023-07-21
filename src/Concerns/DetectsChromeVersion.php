@@ -113,7 +113,6 @@ trait DetectsChromeVersion
      */
     protected function latestVersion(): string
     {
-
         $versions = json_decode($this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'), true);
 
         return $versions['channels']['Stable']['version']

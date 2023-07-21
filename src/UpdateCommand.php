@@ -2,7 +2,6 @@
 
 namespace Orchestra\DuskUpdater;
 
-use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
