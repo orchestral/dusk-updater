@@ -93,11 +93,9 @@ class Command extends SymfonyCommand
     /**
      * Resolve the download url.
      *
-     * @return array{0: string, 1: string}
-     *
      * @throws \Exception
      */
-    protected function resolveDownloadUrl(string $version, string $slug): array
+    protected function resolveDownloadUrl(string $version, string $slug): string
     {
         if (version_compare($version, '113.0', '<')) {
             if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
@@ -106,10 +104,7 @@ class Command extends SymfonyCommand
                 $slug = 'win';
             }
 
-            return [
-                sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug),
-                $slug,
-            ];
+            return sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);
         }
 
         $milestone = (int) $version;
@@ -127,9 +122,7 @@ class Command extends SymfonyCommand
         $chromedrivers = $versions['milestones'][$milestone]['downloads']['chromedriver']
             ?? throw new Exception('Could not get the ChromeDriver version.');
 
-        $url = collect($chromedrivers)->firstWhere('platform', $slug)['url']
+        return collect($chromedrivers)->firstWhere('platform', $slug)['url']
             ?? throw new Exception('Could not get the ChromeDriver version.');
-
-        return [$url, $slug];
     }
 }

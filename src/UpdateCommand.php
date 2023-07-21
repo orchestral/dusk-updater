@@ -85,7 +85,7 @@ class UpdateCommand extends Command
      */
     protected function download(string $version, string $slug): string
     {
-        [$url, $slug] = $this->resolveDownloadUrl($version, $slug);
+        $url = $this->resolveDownloadUrl($version, $slug);
 
         file_put_contents(
             $archive = $this->directory.'chromedriver.zip',
@@ -119,8 +119,6 @@ class UpdateCommand extends Command
         $zip->extractTo($this->directory);
 
         $binary = $zip->getNameIndex(version_compare($version, '113.0', '<') ? 0 : 1);
-
-        var_dump($binary);
 
         $zip->close();
 
