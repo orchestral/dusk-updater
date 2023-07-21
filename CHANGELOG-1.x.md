@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.6.2
+
+Released: 2023-07-21
+
+### Fixes
+
+* Fixes `mac_arm64` and remove `win64` platform name.
+
 ## 1.6.1
 
 Released: 2023-07-21
