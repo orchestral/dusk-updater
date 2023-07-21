@@ -2,6 +2,7 @@
 
 namespace Orchestra\DuskUpdater\Concerns;
 
+use Exception;
 use InvalidArgumentException;
 use Symfony\Component\Process\Process;
 
@@ -34,21 +35,10 @@ trait DetectsChromeVersion
         'win' => [
             'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
         ],
+        'win64' => [
+            'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
+        ],
     ];
-
-    /**
-     * URL to the home page.
-     *
-     * @var string
-     */
-    protected $homeUrl = 'http://chromedriver.chromium.org/home';
-
-    /**
-     * URL to the latest release version.
-     *
-     * @var string
-     */
-    protected $versionUrl = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d';
 
     /**
      * The legacy versions for the ChromeDriver.
@@ -87,8 +77,12 @@ trait DetectsChromeVersion
 
     /**
      * Find selected ChromeDriver version URL.
+     *
+     * @param  string|null  $version
+     *
+     * @throws \Exception
      */
-    protected function findVersionUrl(?string $version): string
+    protected function findVersionUrl($version): string
     {
         if (! $version) {
             return $this->latestVersion();
@@ -102,29 +96,38 @@ trait DetectsChromeVersion
 
         if ($version < 70) {
             return $this->legacyVersions[$version];
+        } elseif ($version < 115) {
+            return $this->fetchChromeVersionFromUrl(
+                sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
+            );
         }
 
-        return trim(file_get_contents(
-            sprintf($this->versionUrl, $version)
-        ));
+        $milestones = $this->resolveChromeVersionsPerMilestone();
+
+        return $milestones['milestones'][$version]['version']
+            ?? throw new Exception('Could not get the ChromeDriver version.');
     }
 
     /**
      * Get the latest stable ChromeDriver version.
+     *
+     * @throws \Exception
      */
     protected function latestVersion(): string
     {
-        $home = file_get_contents($this->homeUrl);
+        $versions = json_decode($this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'), true);
 
-        preg_match('/chromedriver.storage.googleapis.com\/index.html\?path=([\d.]+)/', $home, $matches);
-
-        return $matches[1];
+        return $versions['channels']['Stable']['version']
+            ?? throw new Exception('Could not get the latest ChromeDriver version.');
     }
 
     /**
      * Detect the installed Chrome/Chromium version.
+     *
+     * @param  string|null  $chromeDirectory
+     * @return array<string, mixed>
      */
-    protected function installedChromeVersion(string $operatingSystem, ?string $chromeDirectory = null): array
+    protected function installedChromeVersion(string $operatingSystem, $chromeDirectory = null): array
     {
         if ($chromeDirectory) {
             if ($operatingSystem === 'win') {
@@ -168,8 +171,6 @@ trait DetectsChromeVersion
     /**
      * Detect the installed ChromeDriver version.
      *
-     * @param string|null $driverDirectory
-     *
      * @return array|null
      */
     protected function installedChromeDriverVersion(string $os, string $driverDirectory)
@@ -180,6 +181,7 @@ trait DetectsChromeVersion
             'mac-intel' => 'chromedriver-mac-intel',
             'mac-arm' => 'chromedriver-mac-arm',
             'win' => 'chromedriver-win.exe',
+            'win64' => 'chromedriver-win64.exe',
         ];
 
         if (! file_exists($driverDirectory.$filenames[$os])) {
@@ -215,4 +217,29 @@ trait DetectsChromeVersion
 
         throw new InvalidArgumentException('ChromeDriver version could not be detected. Please submit an issue: https://github.com/orchestral/dusk-updater');
     }
+
+    /**
+     * Get the chrome version from URL.
+     */
+    protected function fetchChromeVersionFromUrl(string $url): string
+    {
+        return trim((string) $this->fetchUrl($url));
+    }
+
+    /**
+     * Get the chrome versions per milestone.
+     */
+    protected function resolveChromeVersionsPerMilestone(): array
+    {
+        return json_decode(
+            $this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/latest-versions-per-milestone-with-downloads.json'), true
+        );
+    }
+
+    /**
+     * Get contents from URL.
+     *
+     * @throws \Exception
+     */
+    abstract protected function fetchUrl(string $url): string;
 }

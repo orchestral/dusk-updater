@@ -2,8 +2,8 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Orchestra\DuskUpdater\UpdateCommand;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -42,7 +42,7 @@ class UpdateCommandTest extends TestCase
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertStringContainsString("ChromeDriver binary successfully installed for version 108", $output);
+        $this->assertStringContainsString('ChromeDriver binary successfully installed for version 108', $output);
     }
 
     /** @test */

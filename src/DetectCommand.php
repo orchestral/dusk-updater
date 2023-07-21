@@ -3,20 +3,17 @@
 namespace Orchestra\DuskUpdater;
 
 use Composer\Semver\Comparator;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
  */
 class DetectCommand extends Command
 {
-    use Concerns\DetectsChromeVersion;
-
     /**
      * Configure the command options.
      *
@@ -24,15 +21,12 @@ class DetectCommand extends Command
      */
     protected function configure()
     {
-        $this->ignoreValidationErrors();
-
-        $directory = getcwd().'/vendor/laravel/dusk/bin/';
-
         $this->setName('detect')
-                ->setDescription('Detect the installed Chrome/Chromium version.')
-                ->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
-                ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
-                ->addOption('auto-update', null, InputOption::VALUE_NONE, 'Auto update ChromeDriver binary if outdated');
+            ->setDescription('Detect the installed Chrome/Chromium version.')
+            ->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
+            ->addOption('auto-update', null, InputOption::VALUE_NONE, 'Auto update ChromeDriver binary if outdated');
+
+        parent::configure();
     }
 
     /**
@@ -51,7 +45,7 @@ class DetectCommand extends Command
         $currentOS = OperatingSystem::id();
 
         $chromeVersions = $this->installedChromeVersion($currentOS, $chromeDirectory);
-        $driverVersions = $this->installedChromeDriverVersion($currentOS, $driverDirectory);
+        $driverVersions = $this->installedChromeDriverVersion($currentOS, (string) $driverDirectory);
 
         $updated = Comparator::equalTo(
             isset($driverVersions['semver']) ? $driverVersions['semver'] : '',
@@ -78,12 +72,13 @@ class DetectCommand extends Command
 
     /**
      * Update ChromeDriver.
-     *
-     * @param \Symfony\Component\Console\Input\OutputInterface $output
      */
     protected function updateChromeDriver(OutputInterface $output, string $directory, int $version): int
     {
-        $command = $this->getApplication()->find('update');
+        /** @var \Symfony\Component\Console\Application $console */
+        $console = $this->getApplication();
+
+        $command = $console->find('update');
 
         $arguments = [
             'command' => 'update',

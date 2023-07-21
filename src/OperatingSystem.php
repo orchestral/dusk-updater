@@ -12,7 +12,7 @@ class OperatingSystem
     public static function id()
     {
         if (static::onWindows()) {
-            return 'win';
+            return \defined('PHP_INT_SIZE') && PHP_INT_SIZE === 8 ? 'win64' : 'win';
         } elseif (static::onMac()) {
             return static::macArchitectureId();
         }
@@ -31,7 +31,7 @@ class OperatingSystem
             return PHP_OS_FAMILY === 'Windows';
         }
 
-        return PHP_OS === 'WINNT' || \mb_strpos(\php_uname(), 'Microsoft') !== false;
+        return PHP_OS === 'WINNT' || mb_strpos(php_uname(), 'Microsoft') !== false;
     }
 
     /**
