@@ -37,16 +37,6 @@ trait DetectsChromeVersion
     ];
 
     /**
-     * URL to the home page.
-     */
-    protected string $homeUrl = 'http://chromedriver.chromium.org/home';
-
-    /**
-     * URL to the latest release version.
-     */
-    protected string $versionUrl = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d';
-
-    /**
      * The legacy versions for the ChromeDriver.
      *
      * @var array<int, string>
@@ -96,13 +86,14 @@ trait DetectsChromeVersion
 
         $version = (int) $version;
 
+
         if ($version < 70) {
             return $this->legacyVersions[$version];
+        } elseif ($version < 115) {
+            return $this->fetchChromeVersionFromUrl(
+                sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
+            );
         }
-
-        return trim((string) file_get_contents(
-            sprintf($this->versionUrl, $version)
-        ));
     }
 
     /**
@@ -110,11 +101,9 @@ trait DetectsChromeVersion
      */
     protected function latestVersion(): string
     {
-        $home = (string) file_get_contents($this->homeUrl);
-
-        preg_match('/chromedriver.storage.googleapis.com\/index.html\?path=([\d.]+)/', $home, $matches);
-
-        return $matches[1];
+        return $this->fetchChromeVersionFromUrl(
+            'https://chromedriver.storage.googleapis.com/LATEST_RELEASE'
+        );
     }
 
     /**
@@ -211,4 +200,26 @@ trait DetectsChromeVersion
 
         throw new InvalidArgumentException('ChromeDriver version could not be detected. Please submit an issue: https://github.com/orchestral/dusk-updater');
     }
+
+    /**
+     * Get the chrome version from URL.
+     */
+    protected function fetchChromeVersionFromUrl(string $url): string
+    {
+        return trim((string) $this->fetchUrl($url));
+    }
+
+    // protected function fetchChromeVersionFromMilestone(string $milestone): string
+    // {
+    //     return
+    // }
+
+
+    /**
+     * Get contents from URL.
+     *
+     * @param  string  $url
+     * @return string|false
+     */
+    abstract protected function fetchUrl(string $url);
 }

@@ -2,8 +2,8 @@
 
 namespace Orchestra\DuskUpdater;
 
+use Illuminate\Support\Str;
 use RuntimeException;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -45,15 +45,12 @@ class UpdateCommand extends Command
      */
     protected function configure(): void
     {
-        $this->ignoreValidationErrors();
-
-        $directory = getcwd().'/vendor/laravel/dusk/bin/';
-
         $this->setName('update')
             ->setDescription('Install the ChromeDriver binary.')
             ->addArgument('version', InputArgument::OPTIONAL)
-            ->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory)
             ->addOption('all', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
+
+        parent::configure();
     }
 
     /**
@@ -63,8 +60,6 @@ class UpdateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->directory = $input->getOption('install-dir');
-
         $version = $this->version($input);
         $all = $input->getOption('all');
         $currentOS = OperatingSystem::id();
@@ -156,7 +151,7 @@ class UpdateCommand extends Command
             throw new RuntimeException("Unable to rename {$binary} without --install-dir");
         }
 
-        $newName = str_replace('chromedriver', 'chromedriver-'.$os, $binary);
+        $newName = Str::after(str_replace('chromedriver', 'chromedriver-'.$os, $binary), DIRECTORY_SEPARATOR);
 
         rename($this->directory.$binary, $this->directory.$newName);
 
