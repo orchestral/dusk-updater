@@ -2,6 +2,7 @@
 
 namespace Orchestra\DuskUpdater\Concerns;
 
+use Exception;
 use InvalidArgumentException;
 use Symfony\Component\Process\Process;
 
@@ -32,6 +33,9 @@ trait DetectsChromeVersion
             '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
         ],
         'win' => [
+            'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
+        ],
+        'win64' => [
             'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
         ],
     ];
@@ -73,6 +77,8 @@ trait DetectsChromeVersion
 
     /**
      * Find selected ChromeDriver version URL.
+     *
+     * @throws \Exception
      */
     protected function findVersionUrl(?string $version): string
     {
@@ -86,7 +92,6 @@ trait DetectsChromeVersion
 
         $version = (int) $version;
 
-
         if ($version < 70) {
             return $this->legacyVersions[$version];
         } elseif ($version < 115) {
@@ -94,16 +99,25 @@ trait DetectsChromeVersion
                 sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
             );
         }
+
+        $milestones = $this->resolveChromeVersionsPerMilestone();
+
+        return $milestones['milestones'][$version]['version']
+            ?? throw new Exception('Could not get the ChromeDriver version.');
     }
 
     /**
      * Get the latest stable ChromeDriver version.
+     *
+     * @throws \Exception
      */
     protected function latestVersion(): string
     {
-        return $this->fetchChromeVersionFromUrl(
-            'https://chromedriver.storage.googleapis.com/LATEST_RELEASE'
-        );
+
+        $versions = json_decode($this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'), true);
+
+        return $versions['channels']['Stable']['version']
+            ?? throw new Exception('Could not get the latest ChromeDriver version.');
     }
 
     /**
@@ -209,17 +223,20 @@ trait DetectsChromeVersion
         return trim((string) $this->fetchUrl($url));
     }
 
-    // protected function fetchChromeVersionFromMilestone(string $milestone): string
-    // {
-    //     return
-    // }
-
+    /**
+     * Get the chrome versions per milestone.
+     */
+    protected function resolveChromeVersionsPerMilestone(): array
+    {
+        return json_decode(
+            $this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/latest-versions-per-milestone-with-downloads.json'), true
+        );
+    }
 
     /**
      * Get contents from URL.
      *
-     * @param  string  $url
-     * @return string|false
+     * @throws \Exception
      */
-    abstract protected function fetchUrl(string $url);
+    abstract protected function fetchUrl(string $url): string;
 }

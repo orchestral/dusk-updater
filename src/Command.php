@@ -2,7 +2,7 @@
 
 namespace Orchestra\DuskUpdater;
 
-use Composer\Semver\Comparator;
+use Exception;
 use Illuminate\Console\Concerns\InteractsWithIO;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,15 +21,11 @@ class Command extends SymfonyCommand
 
     /**
      * The proxy to download binary.
-     *
-     * @var string|null
      */
     protected ?string $httpProxy;
 
     /**
      * Determine SSL certification verification.
-     *
-     * @var bool
      */
     protected bool $withoutSslVerification = false;
 
@@ -66,14 +62,13 @@ class Command extends SymfonyCommand
         $this->withoutSslVerification = $input->getOption('ssl-no-verify') === false;
     }
 
-
     /**
      * Get contents from URL.
      *
-     * @param  string  $url
-     * @return string|false
+     *
+     * @throws \Exception
      */
-    protected function fetchUrl(string $url)
+    protected function fetchUrl(string $url): string
     {
         $streamOptions = [];
 
@@ -90,6 +85,51 @@ class Command extends SymfonyCommand
             $streamOptions['http'] = ['proxy' => $this->httpProxy, 'request_fulluri' => true];
         }
 
-        return file_get_contents($url, false, stream_context_create($streamOptions));
+        $contents = file_get_contents($url, false, stream_context_create($streamOptions));
+
+        return \is_string($contents) ? $contents : throw new Exception("Unable to fetch contents from [{$url}]");
+    }
+
+    /**
+     * Resolve the download url.
+     *
+     * @return array{0: string, 1: string}
+     *
+     * @throws \Exception
+     */
+    protected function resolveDownloadUrl(string $version, string $slug): array
+    {
+        if (version_compare($version, '113.0', '<')) {
+            if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
+                $slug == 'mac64_m1';
+            } elseif ($slug === 'win64') {
+                $slug = 'win';
+            }
+
+            return [
+                sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug),
+                $slug,
+            ];
+        }
+
+        $milestone = (int) $version;
+
+        $slugs = [
+            'mac64' => 'mac-x64',
+            'mac_arm64' => 'mac-x64',
+        ];
+
+        $slug = $slugs[$slug] ?? $slug;
+
+        $versions = $this->resolveChromeVersionsPerMilestone();
+
+        /** @var array<string, mixed> $chromedrivers */
+        $chromedrivers = $versions['milestones'][$milestone]['downloads']['chromedriver']
+            ?? throw new Exception('Could not get the ChromeDriver version.');
+
+        $url = collect($chromedrivers)->firstWhere('platform', $slug)['url']
+            ?? throw new Exception('Could not get the ChromeDriver version.');
+
+        return [$url, $slug];
     }
 }

@@ -18,11 +18,6 @@ class UpdateCommand extends Command
     use Concerns\DetectsChromeVersion;
 
     /**
-     * URL to the ChromeDriver download.
-     */
-    protected string $downloadUrl = 'https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip';
-
-    /**
      * Download slugs for the available operating systems.
      *
      * @var array<string, string>
@@ -33,12 +28,8 @@ class UpdateCommand extends Command
         'mac-intel' => 'mac64',
         'mac-arm' => 'mac_arm64',
         'win' => 'win32',
+        'win64' => 'win64',
     ];
-
-    /**
-     * The ChromeDriver binary installation directory.
-     */
-    protected ?string $directory;
 
     /**
      * Configure the command options.
@@ -67,7 +58,7 @@ class UpdateCommand extends Command
         foreach ($this->slugs as $os => $slug) {
             if ($all || ($os === $currentOS)) {
                 $archive = $this->download($version, $slug);
-                $binary = $this->extract($archive);
+                $binary = $this->extract($version, $archive);
                 $this->rename($binary, $os);
             }
         }
@@ -94,11 +85,7 @@ class UpdateCommand extends Command
      */
     protected function download(string $version, string $slug): string
     {
-        if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
-            $slug == 'mac64_m1';
-        }
-
-        $url = sprintf($this->downloadUrl, $version, $slug);
+        [$url, $slug] = $this->resolveDownloadUrl($version, $slug);
 
         file_put_contents(
             $archive = $this->directory.'chromedriver.zip',
@@ -119,7 +106,7 @@ class UpdateCommand extends Command
      *
      * @throws \RuntimeException
      */
-    protected function extract(string $archive): string
+    protected function extract(string $version, string $archive): string
     {
         if (\is_null($this->directory)) {
             throw new RuntimeException("Unable to extract {$archive} without --install-dir");
@@ -131,7 +118,9 @@ class UpdateCommand extends Command
 
         $zip->extractTo($this->directory);
 
-        $binary = $zip->getNameIndex(0);
+        $binary = $zip->getNameIndex(version_compare($version, '113.0', '<') ? 0 : 1);
+
+        var_dump($binary);
 
         $zip->close();
 

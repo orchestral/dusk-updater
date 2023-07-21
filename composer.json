@@ -35,9 +35,9 @@
     },
     "require-dev": {
         "laravel/dusk": "^7.6",
-        "laravel/pint": "^1.6",
+        "laravel/pint": "^1.4",
         "phpstan/phpstan": "^1.10.7",
-        "phpunit/phpunit": "^10.1"
+        "phpunit/phpunit": "^9.6 || ^10.1"
     },
     "config": {
         "sort-packages": true
