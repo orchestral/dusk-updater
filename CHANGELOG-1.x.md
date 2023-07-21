@@ -2,6 +2,16 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.6.0
+
+Released: 2023-07-21
+
+### Changes
+
+* Bump minimum supported PHP version to `7.3`+.
+* Requires `composer-runtime-api` version `2.2`+.
+* Support retrieving ChromeDriver 115 using new API.
+* Use `$_composer_autoload_path` when available.
 
 ## 1.5.2
 
