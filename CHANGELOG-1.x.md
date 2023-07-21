@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.6.3
+
+Released: 2023-07-21
+
+### Fixes
+
+* Fixes ChromeDriver download URL used for `113` and `114`. 
+
 ## 1.6.2
 
 Released: 2023-07-21
