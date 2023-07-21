@@ -98,8 +98,6 @@ class Command extends SymfonyCommand
         if (version_compare($version, '113.0', '<')) {
             if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
                 $slug == 'mac64_m1';
-            } elseif ($slug === 'win64') {
-                $slug = 'win';
             }
 
             return sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);
@@ -109,7 +107,7 @@ class Command extends SymfonyCommand
 
         $slugs = [
             'mac64' => 'mac-x64',
-            'mac_arm64' => 'mac-x64',
+            'mac_arm64' => 'mac-arm64',
         ];
 
         $slug = $slugs[$slug] ?? $slug;
