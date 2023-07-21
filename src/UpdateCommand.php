@@ -86,14 +86,8 @@ class UpdateCommand extends Command
 
         file_put_contents(
             $archive = $this->directory.'chromedriver.zip',
-            $resource = @fopen($url, 'r')
+            $this->fetchUrl($url)
         );
-
-        if (! \is_resource($resource) || ! file_exists($archive)) {
-            throw new RuntimeException("Unable to retrieve ChromeDriver [{$version}].");
-        } else {
-            fclose($resource);
-        }
 
         return $archive;
     }
