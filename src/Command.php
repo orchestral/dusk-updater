@@ -93,7 +93,11 @@ class Command extends SymfonyCommand
 
         $contents = file_get_contents($url, false, stream_context_create($streamOptions));
 
-        return \is_string($contents) ? $contents : throw new Exception("Unable to fetch contents from [{$url}]");
+        if (\is_string($contents)) {
+            return $contents;
+        }
+
+        throw new Exception("Unable to fetch contents from [{$url}]");
     }
 
     /**
