@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.6.1
+
+Released: 2023-07-21
+
+### Fixes
+
+* Retrieve ChromeDriver archive using `--proxy` and `--ssl-no-verify` options.
+
 ## 1.6.0
 
 Released: 2023-07-21
