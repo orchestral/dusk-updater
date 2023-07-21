@@ -14,8 +14,6 @@ use ZipArchive;
  */
 class UpdateCommand extends Command
 {
-    use Concerns\DetectsChromeVersion;
-
     /**
      * Download slugs for the available operating systems.
      *

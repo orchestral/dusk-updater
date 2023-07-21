@@ -170,7 +170,7 @@ trait DetectsChromeVersion
      *
      * @return array<string, mixed>|null
      */
-    protected function installedChromeDriverVersion(string $os, ?string $driverDirectory)
+    protected function installedChromeDriverVersion(string $os, ?string $driverDirectory): ?array
     {
         $filenames = [
             'linux' => 'chromedriver-linux',
@@ -178,6 +178,7 @@ trait DetectsChromeVersion
             'mac-intel' => 'chromedriver-mac-intel',
             'mac-arm' => 'chromedriver-mac-arm',
             'win' => 'chromedriver-win.exe',
+            'win64' => 'chromedriver-win64.exe',
         ];
 
         if (! file_exists($driverDirectory.$filenames[$os])) {

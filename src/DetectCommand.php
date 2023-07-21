@@ -43,7 +43,7 @@ class DetectCommand extends Command
         $currentOS = OperatingSystem::id();
 
         $chromeVersions = $this->installedChromeVersion($currentOS, $chromeDirectory);
-        $driverVersions = $this->installedChromeDriverVersion($currentOS, $driverDirectory);
+        $driverVersions = $this->installedChromeDriverVersion($currentOS, (string) $driverDirectory);
 
         $updated = Comparator::equalTo(
             isset($driverVersions['semver']) ? $driverVersions['semver'] : '',
