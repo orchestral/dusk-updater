@@ -2,6 +2,22 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.1.2
+
+Released: 2023-07-21
+
+### Fixes
+
+* Fixes `mac_arm64` and remove `win64` platform name.
+
+## 2.1.1
+
+Released: 2023-07-21
+
+### Fixes
+
+* Retrieve ChromeDriver archive using `--proxy` and `--ssl-no-verify` options.
+
 ## 2.1.0
 
 Released: 2023-07-21
