@@ -3,7 +3,6 @@
 namespace Orchestra\DuskUpdater;
 
 use Exception;
-use Illuminate\Console\Concerns\InteractsWithIO;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,8 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Command extends SymfonyCommand
 {
-    use Concerns\DetectsChromeVersion,
-        InteractsWithIO;
+    use Concerns\DetectsChromeVersion;
 
     /**
      * The ChromeDriver binary installation directory.
