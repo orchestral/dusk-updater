@@ -97,9 +97,7 @@ trait DetectsChromeVersion
         if ($version < 70) {
             return $this->legacyVersions[$version];
         } elseif ($version < 115) {
-            return $this->fetchChromeVersionFromUrl(
-                sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
-            );
+            return $this->fetchChromeVersionFromUrl($version);
         }
 
         $milestones = $this->resolveChromeVersionsPerMilestone();
@@ -231,9 +229,11 @@ trait DetectsChromeVersion
     /**
      * Get the chrome version from URL.
      */
-    protected function fetchChromeVersionFromUrl(string $url): string
+    protected function fetchChromeVersionFromUrl(int $version): string
     {
-        return trim((string) $this->fetchUrl($url));
+        return trim((string) $this->fetchUrl(
+            sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
+        ));
     }
 
     /**
