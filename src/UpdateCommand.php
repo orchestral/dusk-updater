@@ -16,20 +16,6 @@ use ZipArchive;
 class UpdateCommand extends Command
 {
     /**
-     * Download slugs for the available operating systems.
-     *
-     * @var array<string, string>
-     */
-    protected array $slugs = [
-        'linux' => 'linux64',
-        'mac' => 'mac64',
-        'mac-intel' => 'mac64',
-        'mac-arm' => 'mac_arm64',
-        'win' => 'win32',
-        'win64' => 'win64',
-    ];
-
-    /**
      * Configure the command options.
      */
     protected function configure(): void
@@ -53,9 +39,9 @@ class UpdateCommand extends Command
         $all = $input->getOption('all');
         $currentOS = OperatingSystem::id();
 
-        foreach ($this->slugs as $os => $slug) {
+        foreach (OperatingSystem::all() as $os) {
             if ($all || ($os === $currentOS)) {
-                $archive = $this->download($version, $slug);
+                $archive = $this->download($version, $os);
                 $binary = $this->extract($version, $archive);
                 $this->rename($binary, $os);
             }
@@ -81,9 +67,9 @@ class UpdateCommand extends Command
      *
      * @throws \RuntimeException
      */
-    protected function download(string $version, string $slug): string
+    protected function download(string $version, string $os): string
     {
-        $url = $this->resolveDownloadUrl($version, $slug);
+        $url = $this->resolveChromeDriverDownloadUrl($version, $os);
 
         try {
             file_put_contents(

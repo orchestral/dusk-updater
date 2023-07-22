@@ -35,9 +35,6 @@ trait DetectsChromeVersion
         'win' => [
             'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
         ],
-        'win64' => [
-            'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
-        ],
     ];
 
     /**
@@ -176,7 +173,6 @@ trait DetectsChromeVersion
             'mac-intel' => 'chromedriver-mac-intel',
             'mac-arm' => 'chromedriver-mac-arm',
             'win' => 'chromedriver-win.exe',
-            'win64' => 'chromedriver-win64.exe',
         ];
 
         if (! file_exists($driverDirectory.$filenames[$os])) {

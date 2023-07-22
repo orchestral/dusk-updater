@@ -5,6 +5,20 @@ namespace Orchestra\DuskUpdater;
 class OperatingSystem
 {
     /**
+     * Returns all possible OS.
+     */
+    public static function all(): array
+    {
+        return [
+            'linux',
+            'mac',
+            'mac-intel',
+            'mac-arm',
+            'win',
+        ];
+    }
+
+    /**
      * Returns the current OS identifier.
      */
     public static function id(): string

@@ -57,7 +57,7 @@ class Command extends SymfonyCommand
     {
         $this->directory = $input->getOption('install-dir');
         $this->httpProxy = $input->getOption('proxy');
-        $this->withoutSslVerification = $input->getOption('ssl-no-verify') === false;
+        $this->withoutSslVerification = $input->getOption('ssl-no-verify') === true;
     }
 
     /**
@@ -68,22 +68,9 @@ class Command extends SymfonyCommand
      */
     protected function fetchUrl(string $url): string
     {
-        $streamOptions = [];
-
-        if ($this->withoutSslVerification === false) {
-            $streamOptions = [
-                'ssl' => [
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                ],
-            ];
-        }
-
-        if (! empty($this->httpProxy)) {
-            $streamOptions['http'] = ['proxy' => $this->httpProxy, 'request_fulluri' => true];
-        }
-
-        $contents = @file_get_contents($url, false, stream_context_create($streamOptions));
+        $contents = @file_get_contents(
+            $url, false, stream_context_create(request_context_payload($this->httpProxy, $this->withoutSslVerification))
+        );
 
         return \is_string($contents) ? $contents : throw new Exception("Unable to fetch contents from [{$url}]");
     }
@@ -93,24 +80,15 @@ class Command extends SymfonyCommand
      *
      * @throws \Exception
      */
-    protected function resolveDownloadUrl(string $version, string $slug): string
+    protected function resolveChromeDriverDownloadUrl(string $version, string $os): string
     {
-        if (version_compare($version, '115.0', '<')) {
-            if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
-                $slug == 'mac64_m1';
-            }
+        $slug = resolve_chromedriver_slug($version, $os);
 
+        if (version_compare($version, '115.0', '<')) {
             return sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);
         }
 
         $milestone = (int) $version;
-
-        $slugs = [
-            'mac64' => 'mac-x64',
-            'mac_arm64' => 'mac-arm64',
-        ];
-
-        $slug = $slugs[$slug] ?? $slug;
 
         $versions = $this->resolveChromeVersionsPerMilestone();
 
