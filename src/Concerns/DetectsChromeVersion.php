@@ -94,7 +94,7 @@ trait DetectsChromeVersion
      *
      * @return array<string, mixed>
      */
-    protected function installedChromeVersion(string $operatingSystem, ?string $chromeDirectory = null): array
+    protected function installedChromeVersion(string $operatingSystem, ?string $directory = null): array
     {
         if ($directory) {
             if ($operatingSystem === 'win') {
