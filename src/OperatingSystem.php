@@ -57,6 +57,8 @@ class OperatingSystem
 
     /**
      * Resolve Chrome version commands.
+     *
+     * @return array<int, string>
      */
     public static function chromeVersionCommands(string $operatingSystem): array
     {
