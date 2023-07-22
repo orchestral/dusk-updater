@@ -35,8 +35,8 @@ class HelpersTest extends TestCase
         $this->assertSame([], request_context_payload());
 
         $this->assertSame([
-            'http' => ['proxy' => 'http://192.168.1.101', 'request_fulluri' => true],
-        ], request_context_payload('http://192.168.1.101'));
+            'http' => ['proxy' => 'tcp://127.0.0.1:9000', 'request_fulluri' => true],
+        ], request_context_payload('tcp://127.0.0.1:9000'));
 
         $this->assertSame([
             'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
@@ -44,8 +44,8 @@ class HelpersTest extends TestCase
 
         $this->assertSame([
             'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
-            'http' => ['proxy' => 'http://192.168.1.101', 'request_fulluri' => true],
-        ], request_context_payload('http://192.168.1.101', true));
+            'http' => ['proxy' => 'tcp://127.0.0.1:9000', 'request_fulluri' => true],
+        ], request_context_payload('tcp://127.0.0.1:9000', true));
     }
 
     /**
