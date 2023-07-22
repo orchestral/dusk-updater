@@ -94,7 +94,7 @@ class Command extends SymfonyCommand
      */
     protected function resolveChromeDriverDownloadUrl(string $version, string $operatingSystem): string
     {
-        $slug = chromedriver_slug($version, $operatingSystem);
+        $slug = OperatingSystem::chromeDriverSlug($operatingSystem, $version);
 
         if (version_compare($version, '115.0', '<')) {
             return sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);

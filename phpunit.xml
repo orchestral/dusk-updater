@@ -14,9 +14,6 @@
     <include>
         <directory suffix=".php">src</directory>
     </include>
-    <exclude>
-        <file>src/OperatingSystem.php</file>
-    </exclude>
   </coverage>
   <testsuites>
     <testsuite name="Unit">

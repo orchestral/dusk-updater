@@ -27,36 +27,6 @@ function chromedriver(string $operatingSystem): string
 }
 
 /**
- * Determine ChromeDriver slug.
- *
- * @throws \InvalidArgumentException
- */
-function chromedriver_slug(string $version, string $operatingSystem): string
-{
-    $slugs = [
-        'linux' => 'linux64',
-        'mac' => 'mac-x64',
-        'mac-intel' => 'mac-x64',
-        'mac-arm' => 'mac-arm64',
-        'win' => 'win32',
-    ];
-
-    if (is_null($slug = ($slugs[$operatingSystem] ?? null))) {
-        throw new InvalidArgumentException("Unable to find ChromeDriver slug for Operating System [{$operatingSystem}]");
-    }
-
-    if (version_compare($version, '115.0', '<')) {
-        if ($slug === 'mac-arm64') {
-            return version_compare($version, '106.0.5249', '<') ? 'mac64_m1' : 'mac_arm64';
-        } elseif ($slug === 'mac-x64') {
-            return 'mac64';
-        }
-    }
-
-    return $slug;
-}
-
-/**
  * Rename exported ChromeDriver binary filename.
  */
 function rename_chromedriver_binary(string $binary, string $operatingSystem): string
