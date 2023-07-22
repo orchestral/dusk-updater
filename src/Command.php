@@ -92,9 +92,9 @@ class Command extends SymfonyCommand
      *
      * @throws \Exception
      */
-    protected function resolveChromeDriverDownloadUrl(string $version, string $os): string
+    protected function resolveChromeDriverDownloadUrl(string $version, string $operatingSystem): string
     {
-        $slug = resolve_chromedriver_slug($version, $os);
+        $slug = resolve_chromedriver_slug($version, $operatingSystem);
 
         if (version_compare($version, '115.0', '<')) {
             return sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);

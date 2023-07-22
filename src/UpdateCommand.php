@@ -41,11 +41,11 @@ class UpdateCommand extends Command
         $all = $input->getOption('all');
         $currentOS = OperatingSystem::id();
 
-        foreach (OperatingSystem::all() as $os) {
-            if ($all || ($os === $currentOS)) {
-                $archive = $this->download($version, $os);
+        foreach (OperatingSystem::all() as $operatingSystem) {
+            if ($all || ($operatingSystem === $currentOS)) {
+                $archive = $this->download($version, $operatingSystem);
                 $binary = $this->extract($version, $archive);
-                $this->rename($binary, $os);
+                $this->rename($binary, $operatingSystem);
             }
         }
 
@@ -67,9 +67,9 @@ class UpdateCommand extends Command
     /**
      * Download the ChromeDriver archive.
      */
-    protected function download(string $version, string $os): string
+    protected function download(string $version, string $operatingSystem): string
     {
-        $url = $this->resolveChromeDriverDownloadUrl($version, $os);
+        $url = $this->resolveChromeDriverDownloadUrl($version, $operatingSystem);
 
         try {
             file_put_contents(
@@ -114,13 +114,13 @@ class UpdateCommand extends Command
      *
      * @throws \RuntimeException
      */
-    protected function rename(string $binary, string $os): void
+    protected function rename(string $binary, string $operatingSystem): void
     {
         if (\is_null($this->directory)) {
             throw new RuntimeException("Unable to rename {$binary} without --install-dir");
         }
 
-        $newName = chromedriver_binary_filename($binary, $os);
+        $newName = chromedriver_binary_filename($binary, $operatingSystem);
 
         rename($this->directory.$binary, $this->directory.$newName);
 

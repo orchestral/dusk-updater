@@ -7,14 +7,14 @@ use InvalidArgumentException;
 /**
  * Define ChromeDriver binary filename.
  */
-function chromedriver_binary_filename(string $binary, string $os): string
+function chromedriver_binary_filename(string $binary, string $operatingSystem): string
 {
     return strpos($binary, DIRECTORY_SEPARATOR) > 0
-        ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$os, $binary), 2))[0]
-        : str_replace('chromedriver', 'chromedriver-'.$os, $binary);
+        ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
+        : str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
 }
 
-function resolve_chromedriver_slug($version, string $os): string
+function resolve_chromedriver_slug($version, string $operatingSystem): string
 {
     $slugs = [
         'linux' => 'linux64',
@@ -25,8 +25,8 @@ function resolve_chromedriver_slug($version, string $os): string
         'win64' => 'win64',
     ];
 
-    if (is_null($slug = $slugs[$os])) {
-        throw new InvalidArgumentException("Unable to find slug for Operating System [{$os}]");
+    if (is_null($slug = $slugs[$operatingSystem])) {
+        throw new InvalidArgumentException("Unable to find slug for Operating System [{$operatingSystem}]");
     }
 
     if (version_compare($version, '115.0', '<')) {
