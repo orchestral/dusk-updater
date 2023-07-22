@@ -74,16 +74,6 @@ class Command extends SymfonyCommand
     }
 
     /**
-     * Download contents from URL and save it to specific location.
-     *
-     * @throws \Exception
-     */
-    protected function fetchDownload(string $url, string $destination): void
-    {
-        download($url, $destination, $this->httpProxy, $this->withSslVerification);
-    }
-
-    /**
      * Get contents from URL.
      *
      * @throws \Exception
