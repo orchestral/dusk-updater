@@ -3,6 +3,8 @@
 namespace Orchestra\DuskUpdater;
 
 use Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Utils;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -73,23 +75,49 @@ class Command extends SymfonyCommand
         $this->withoutSslVerification = $input->getOption('ssl-no-verify') === true;
     }
 
+     /**
+     * Download contents from URL and save it to specific location.
+     *
+     * @throws \Exception
+     */
+    protected function fetchDownload(string $url, string $destination): void
+    {
+        $client = new Client();
+
+        $resource = Utils::tryFopen($destination, 'w');
+
+        $response = $client->get($url, array_merge([
+            'verify' => $this->withoutSslVerification === false,
+            'sink' => $resource,
+        ], array_filter([
+            'proxy' => $this->httpProxy,
+        ])));
+
+        if ($response->getStatusCode() < 200 || $response->getStatusCode() > 299) {
+            throw new Exception("Unable to fetch contents from [{$url}]");
+        }
+    }
+
     /**
      * Get contents from URL.
-     *
      *
      * @throws \Exception
      */
     protected function fetchUrl(string $url): string
     {
-        $contents = @file_get_contents(
-            $url, false, stream_context_create(request_context_payload($this->httpProxy, $this->withoutSslVerification))
-        );
+        $client = new Client();
 
-        if (\is_string($contents)) {
-            return $contents;
+        $response = $client->get($url, array_merge([
+            'verify' => $this->withoutSslVerification === false
+        ], array_filter([
+            'proxy' => $this->httpProxy,
+        ])));
+
+        if ($response->getStatusCode() < 200 || $response->getStatusCode() > 299) {
+            throw new Exception("Unable to fetch contents from [{$url}]");
         }
 
-        throw new Exception("Unable to fetch contents from [{$url}]");
+        return (string) $response->getBody();
     }
 
     /**
