@@ -56,6 +56,14 @@ class HelpersTest extends TestCase
         $this->assertSame($expected, chromedriver_slug($version, $os));
     }
 
+    public function test_it_cant_resolve_invalid_chromedriver_slug()
+    {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Unable to find ChromeDriver slug for Operating System [window_os]');
+
+       chromedriver_slug('115.0', 'window_os');
+    }
+
     public static function resolveChromeDriverSlugDataProvider()
     {
         yield ['115.0', 'linux', 'linux64'];

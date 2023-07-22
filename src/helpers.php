@@ -41,7 +41,7 @@ function chromedriver_slug($version, string $operatingSystem): string
         'win' => 'win32',
     ];
 
-    if (is_null($slug = $slugs[$operatingSystem])) {
+    if (is_null($slug = ($slugs[$operatingSystem] ?? null))) {
         throw new InvalidArgumentException("Unable to find ChromeDriver slug for Operating System [{$operatingSystem}]");
     }
 
