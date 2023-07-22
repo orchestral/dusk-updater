@@ -45,11 +45,11 @@ function resolve_chromedriver_slug($version, string $operatingSystem): string
  *
  * @param  string|null  $proxy
  */
-function request_context_payload($proxy = null, bool $without_ssl_verification = false): array
+function request_context_payload($proxy = null, bool $withoutSslVerification = false): array
 {
     $streamOptions = [];
 
-    if ($without_ssl_verification === true) {
+    if ($withoutSslVerification === true) {
         $streamOptions = [
             'ssl' => [
                 'verify_peer' => false,
