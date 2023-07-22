@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.2.0
+
+Released: 2023-07-22
+
+### Changes
+
+* Refactor code usage. 
+* Use `guzzlehttp/guzzle` to improves downloading from new API.
+
 ## 2.1.3
 
 Released: 2023-07-21
