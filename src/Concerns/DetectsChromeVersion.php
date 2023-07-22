@@ -4,6 +4,7 @@ namespace Orchestra\DuskUpdater\Concerns;
 
 use Exception;
 use InvalidArgumentException;
+use Orchestra\DuskUpdater\OperatingSystem;
 use Symfony\Component\Process\Process;
 
 /**
@@ -11,32 +12,6 @@ use Symfony\Component\Process\Process;
  */
 trait DetectsChromeVersion
 {
-    /**
-     * The default commands to detect the installed Chrome/Chromium version.
-     *
-     * @var array<string, array<int, string>>
-     */
-    protected array $chromeCommands = [
-        'linux' => [
-            '/usr/bin/google-chrome --version',
-            '/usr/bin/chromium-browser --version',
-            '/usr/bin/chromium --version',
-            '/usr/bin/google-chrome-stable --version',
-        ],
-        'mac' => [
-            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
-        ],
-        'mac-intel' => [
-            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
-        ],
-        'mac-arm' => [
-            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
-        ],
-        'win' => [
-            'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
-        ],
-    ];
-
     /**
      * The legacy versions for the ChromeDriver.
      *
@@ -111,7 +86,7 @@ trait DetectsChromeVersion
         $versions = json_decode($this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'), true);
 
         return $versions['channels']['Stable']['version']
-            ?? throw new Exception('Could not get the latest ChromeDriver version.');
+            ?? throw new Exception('Could not get the latest ChromeDriver version.');\
     }
 
     /**
@@ -121,14 +96,14 @@ trait DetectsChromeVersion
      */
     protected function installedChromeVersion(string $operatingSystem, ?string $chromeDirectory = null): array
     {
-        if ($chromeDirectory) {
+        if ($directory) {
             if ($operatingSystem === 'win') {
                 throw new InvalidArgumentException('Chrome version cannot be detected in custom installation path on Windows.');
             }
 
-            $commands = [$chromeDirectory.' --version'];
+            $commands = [$directory.' --version'];
         } else {
-            $commands = $this->chromeCommands[$operatingSystem];
+            $commands = OperatingSystem::chromeVersionCommands($operatingSystem);
         }
 
         foreach ($commands as $command) {
@@ -165,17 +140,11 @@ trait DetectsChromeVersion
      *
      * @return array<string, mixed>|null
      */
-    protected function installedChromeDriverVersion(string $os, ?string $driverDirectory): ?array
+    protected function installedChromeDriverVersion(string $operatingSystem, string $directory): ?array
     {
-        $filenames = [
-            'linux' => 'chromedriver-linux',
-            'mac' => 'chromedriver-mac',
-            'mac-intel' => 'chromedriver-mac-intel',
-            'mac-arm' => 'chromedriver-mac-arm',
-            'win' => 'chromedriver-win.exe',
-        ];
+        $filename = OperatingSystem::chromeDriverBinary($operatingSystem);
 
-        if (! file_exists($driverDirectory.$filenames[$os])) {
+        if (! file_exists($directory.$filename)) {
             return [
                 'full' => null,
                 'semver' => null,
@@ -185,7 +154,7 @@ trait DetectsChromeVersion
             ];
         }
 
-        $command = $driverDirectory.$filenames[$os].' --version';
+        $command = $directory.$filename.' --version';
         $process = Process::fromShellCommandline($command);
 
         $process->run();
