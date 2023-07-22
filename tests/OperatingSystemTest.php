@@ -23,6 +23,23 @@ class OperatingSystemTest extends TestCase
         ], OperatingSystem::all());
     }
 
+    public function test_it_can_resolve_chrome_version_commands()
+    {
+        foreach (OperatingSystem::all() as $os) {
+            $commands = OperatingSystem::chromeVersionCommands($os);
+
+            $this->assertTrue(is_array($commands), 'Commands should be an array');
+            $this->assertFalse(empty($commands), 'Commands should not be empty');
+        }
+    }
+    public function test_it_cant_resolve_invalid_chrome_version_commands()
+    {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Unable to find commands for Operating System [window_os]');
+
+        OperatingSystem::chromeVersionCommands('window_os');
+    }
+
     /**
      * @dataProvider resolveChromeDriverBinaryDataProvider
      */
