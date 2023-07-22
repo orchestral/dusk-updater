@@ -16,20 +16,6 @@ use ZipArchive;
 class UpdateCommand extends Command
 {
     /**
-     * Download slugs for the available operating systems.
-     *
-     * @var array
-     */
-    protected $slugs = [
-        'linux' => 'linux64',
-        'mac' => 'mac64',
-        'mac-intel' => 'mac-x64',
-        'mac-arm' => 'mac-arm64',
-        'win' => 'win32',
-        'win64' => 'win64',
-    ];
-
-    /**
      * Configure the command options.
      *
      * @return void
