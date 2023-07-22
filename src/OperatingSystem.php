@@ -59,7 +59,7 @@ class OperatingSystem
     {
         $commands = static::$platforms[$operatingSystem]['commands'] ?? null;
 
-        if (is_null($commands)) {
+        if (\is_null($commands)) {
             throw new InvalidArgumentException("Unable to find commands for Operating System [{$operatingSystem}]");
         }
 
@@ -73,7 +73,7 @@ class OperatingSystem
     {
         $binary = static::$platforms[$operatingSystem]['binary'] ?? null;
 
-        if (is_null($binary)) {
+        if (\is_null($binary)) {
             throw new InvalidArgumentException("Unable to find ChromeDriver binary for Operating System [{$operatingSystem}]");
         }
 
@@ -89,11 +89,11 @@ class OperatingSystem
     {
         $slug = static::$platforms[$operatingSystem]['slug'] ?? null;
 
-        if (is_null($slug)) {
+        if (\is_null($slug)) {
             throw new InvalidArgumentException("Unable to find ChromeDriver slug for Operating System [{$operatingSystem}]");
         }
 
-        if (! is_null($version) && version_compare($version, '115.0', '<')) {
+        if (! \is_null($version) && version_compare($version, '115.0', '<')) {
             if ($slug === 'mac-arm64') {
                 return version_compare($version, '106.0.5249', '<') ? 'mac64_m1' : 'mac_arm64';
             } elseif ($slug === 'mac-x64') {
