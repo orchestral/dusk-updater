@@ -111,6 +111,8 @@ class OperatingSystem
 
     /**
      * Returns all possible OS.
+     *
+     * @return array<int, string>
      */
     public static function all(): array
     {
