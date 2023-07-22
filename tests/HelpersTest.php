@@ -28,22 +28,4 @@ class HelpersTest extends TestCase
         yield ['mac-arm', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver', 'chromedriver-mac-arm'];
         yield ['win', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver.exe', 'chromedriver-win.exe'];
     }
-
-    public function test_it_can_resolve_request_context_payload()
-    {
-        $this->assertSame([], request_context_payload());
-
-        $this->assertSame([
-            'http' => ['proxy' => 'tcp://127.0.0.1:9000', 'request_fulluri' => true],
-        ], request_context_payload('tcp://127.0.0.1:9000'));
-
-        $this->assertSame([
-            'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
-        ], request_context_payload(null, true));
-
-        $this->assertSame([
-            'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
-            'http' => ['proxy' => 'tcp://127.0.0.1:9000', 'request_fulluri' => true],
-        ], request_context_payload('tcp://127.0.0.1:9000', true));
-    }
 }
