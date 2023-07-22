@@ -6,10 +6,8 @@ class OperatingSystem
 {
     /**
      * Returns all possible OS.
-     *
-     * @return array
      */
-    public static function all()
+    public static function all(): array
     {
         return [
             'linux',
@@ -22,10 +20,8 @@ class OperatingSystem
 
     /**
      * Returns the current OS identifier.
-     *
-     * @return string
      */
-    public static function id()
+    public static function id(): string
     {
         if (static::onWindows()) {
             return 'win';
@@ -38,10 +34,8 @@ class OperatingSystem
 
     /**
      * Determine if the operating system is Windows or Windows Subsystem for Linux.
-     *
-     * @return bool
      */
-    public static function onWindows()
+    public static function onWindows(): bool
     {
         if (\defined('PHP_OS_FAMILY')) {
             return PHP_OS_FAMILY === 'Windows';
@@ -52,10 +46,8 @@ class OperatingSystem
 
     /**
      * Determine if the operating system is macOS.
-     *
-     * @return bool
      */
-    public static function onMac()
+    public static function onMac(): bool
     {
         if (\defined('PHP_OS_FAMILY')) {
             return PHP_OS_FAMILY === 'Darwin';
@@ -66,10 +58,8 @@ class OperatingSystem
 
     /**
      * Mac platform architecture ID.
-     *
-     * @return string
      */
-    public static function macArchitectureId()
+    public static function macArchitectureId(): string
     {
         switch (php_uname('m')) {
             case 'arm64':
