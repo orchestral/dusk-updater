@@ -4,21 +4,22 @@ namespace Orchestra\DuskUpdater\Tests;
 
 use function Orchestra\DuskUpdater\{
     chromedriver_binary_filename,
-    request_context_payload
+    request_context_payload,
+    resolve_chromedriver_slug
 };
 use PHPUnit\Framework\TestCase;
 
 class HelpersTest extends TestCase
 {
     /**
-     * @dataProvider binaryFileDataProvider
+     * @dataProvider chromedriverBinaryFilenameDataProvider
      */
-    public function test_it_can_resolve_correct_filename($os, $given, $expected)
+    public function test_it_can_resolve_chromedriver_binary_filename($os, $given, $expected)
     {
         $this->assertSame(chromedriver_binary_filename($given, $os), $expected);
     }
 
-    public static function binaryFileDataProvider()
+    public static function chromedriverBinaryFilenameDataProvider()
     {
         yield ['linux', 'chromedriver', 'chromedriver-linux'];
         yield ['mac-intel', 'chromedriver', 'chromedriver-mac-intel'];
@@ -47,5 +48,36 @@ class HelpersTest extends TestCase
             'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
             'http' => ['proxy' => 'http://192.168.1.101', 'request_fulluri' => true],
         ], request_context_payload('http://192.168.1.101', true));
+    }
+
+    /**
+     * @dataProvider resolveChromeDriverSlugDataProvider
+     */
+    public function test_it_can_resolve_chromedriver_slug($version, $os, $expected)
+    {
+        $this->assertSame($expected, resolve_chromedriver_slug($version, $os));
+    }
+
+    public static function resolveChromeDriverSlugDataProvider()
+    {
+        yield ['115.0', 'linux', 'linux64'];
+        yield ['113.0', 'linux', 'linux64'];
+        yield ['105.0', 'linux', 'linux64'];
+
+        yield ['115.0', 'mac', 'mac-x64'];
+        yield ['113.0', 'mac', 'mac64'];
+        yield ['105.0', 'mac', 'mac64'];
+
+        yield ['115.0', 'mac-intel', 'mac-x64'];
+        yield ['113.0', 'mac-intel', 'mac64'];
+        yield ['105.0', 'mac-intel', 'mac64'];
+
+        yield ['115.0', 'mac-arm', 'mac-arm64'];
+        yield ['113.0', 'mac-arm', 'mac_arm64'];
+        yield ['105.0', 'mac-arm', 'mac64_m1'];
+
+        yield ['115.0', 'win', 'win32'];
+        yield ['113.0', 'win', 'win32'];
+        yield ['105.0', 'win', 'win32'];
     }
 }

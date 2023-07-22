@@ -23,8 +23,8 @@ class UpdateCommand extends Command
     protected $slugs = [
         'linux' => 'linux64',
         'mac' => 'mac64',
-        'mac-intel' => 'mac64',
-        'mac-arm' => 'mac_arm64',
+        'mac-intel' => 'mac-x64',
+        'mac-arm' => 'mac-arm64',
         'win' => 'win32',
         'win64' => 'win64',
     ];
@@ -55,9 +55,9 @@ class UpdateCommand extends Command
         $all = $input->getOption('all');
         $currentOS = OperatingSystem::id();
 
-        foreach ($this->slugs as $os => $slug) {
+        foreach (OperatingSystem::all() as $os) {
             if ($all || ($os === $currentOS)) {
-                $archive = $this->download($version, $slug);
+                $archive = $this->download($version, $os);
                 $binary = $this->extract($version, $archive);
                 $this->rename($binary, $os);
             }
@@ -81,9 +81,9 @@ class UpdateCommand extends Command
     /**
      * Download the ChromeDriver archive.
      */
-    protected function download(string $version, string $slug): string
+    protected function download(string $version, string $os): string
     {
-        $url = $this->resolveChromeDriverDownloadUrl($version, $slug);
+        $url = $this->resolveChromeDriverDownloadUrl($version, $os);
 
         try {
             file_put_contents(
