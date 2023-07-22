@@ -2,6 +2,7 @@
 
 namespace Orchestra\DuskUpdater;
 
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class OperatingSystem
@@ -57,6 +58,8 @@ class OperatingSystem
 
     /**
      * Resolve Chrome version commands.
+     *
+     * @return array<int, string>
      */
     public static function chromeVersionCommands(string $operatingSystem): array
     {
@@ -109,6 +112,8 @@ class OperatingSystem
 
     /**
      * Returns all possible OS.
+     *
+     * @return array<int, string>
      */
     public static function all(): array
     {
@@ -138,7 +143,7 @@ class OperatingSystem
             return PHP_OS_FAMILY === 'Windows';
         }
 
-        return PHP_OS === 'WINNT' || mb_strpos(php_uname(), 'Microsoft') !== false;
+        return PHP_OS === 'WINNT' || Str::contains(php_uname(), 'Microsoft');
     }
 
     /**
