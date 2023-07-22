@@ -105,15 +105,11 @@ class Command extends SymfonyCommand
         $versions = $this->resolveChromeVersionsPerMilestone();
 
         /** @var array<string, mixed> $chromedrivers */
-        $chromedrivers = $versions['milestones'][$milestone]['downloads']['chromedriver'] ?? null;
-
-        if (is_null($chromedrivers)) {
+        if (is_null($chromedrivers = $versions['milestones'][$milestone]['downloads']['chromedriver'])) {
             throw new Exception('Could not get the ChromeDriver version.');
         }
 
-        $url = collect($chromedrivers)->firstWhere('platform', $slug)['url'];
-
-        if (is_null($url)) {
+        if (is_null($url = collect($chromedrivers)->firstWhere('platform', $slug)['url'])) {
             throw new Exception('Could not get the ChromeDriver version.');
         }
 

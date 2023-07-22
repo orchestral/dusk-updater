@@ -186,7 +186,6 @@ trait DetectsChromeVersion
             'mac-intel' => 'chromedriver-mac-intel',
             'mac-arm' => 'chromedriver-mac-arm',
             'win' => 'chromedriver-win.exe',
-            'win64' => 'chromedriver-win64.exe',
         ];
 
         if (! file_exists($driverDirectory.$filenames[$os])) {
