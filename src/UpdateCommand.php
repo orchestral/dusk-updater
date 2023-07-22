@@ -83,7 +83,7 @@ class UpdateCommand extends Command
      */
     protected function download(string $version, string $slug): string
     {
-        $url = $this->resolveDownloadUrl($version, $slug);
+        $url = $this->resolveChromeDriverDownloadUrl($version, $slug);
 
         try {
             file_put_contents(

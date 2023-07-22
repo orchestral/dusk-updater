@@ -105,7 +105,7 @@ class Command extends SymfonyCommand
      *
      * @throws \Exception
      */
-    protected function resolveDownloadUrl(string $version, string $slug): string
+    protected function resolveChromeDriverDownloadUrl(string $version, string $slug): string
     {
         if (version_compare($version, '115.0', '<')) {
             if ($slug == 'mac_arm64' && version_compare($version, '106.0.5249', '<')) {
