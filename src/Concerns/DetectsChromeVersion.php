@@ -178,7 +178,7 @@ trait DetectsChromeVersion
      *
      * @return array|null
      */
-    protected function installedChromeDriverVersion(string $os, string $directory)
+    protected function installedChromeDriverVersion(string $operatingSystem, string $directory)
     {
         $filenames = [
             'linux' => 'chromedriver-linux',
@@ -188,7 +188,7 @@ trait DetectsChromeVersion
             'win' => 'chromedriver-win.exe',
         ];
 
-        if (! file_exists($directory.$filenames[$os])) {
+        if (! file_exists($directory.$filenames[$operatingSystem])) {
             return [
                 'full' => null,
                 'semver' => null,
@@ -198,7 +198,7 @@ trait DetectsChromeVersion
             ];
         }
 
-        $command = $directory.$filenames[$os].' --version';
+        $command = $directory.$filenames[$operatingSystem].' --version';
         $process = Process::fromShellCommandline($command);
 
         $process->run();
