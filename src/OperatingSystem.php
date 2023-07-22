@@ -52,6 +52,9 @@ class OperatingSystem
         ],
     ];
 
+    /**
+     * Resolve Chrome version commands.
+     */
     public static function chromeVersionCommands(string $operatingSystem): array
     {
         $commands = static::$platforms[$operatingSystem]['commands'] ?? null;
@@ -61,6 +64,20 @@ class OperatingSystem
         }
 
         return $commands;
+    }
+
+    /**
+     * Resolve ChromeDriver binary.
+     */
+    public static function chromeDriverBinary(string $operatingSystem): string
+    {
+        $binary = static::$platforms[$operatingSystem]['binary'] ?? null;
+
+        if (is_null($binary)) {
+            throw new InvalidArgumentException("Unable to find ChromeDriver binary for Operating System [{$operatingSystem}]");
+        }
+
+        return $binary;
     }
 
     /**

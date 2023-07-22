@@ -24,6 +24,31 @@ class OperatingSystemTest extends TestCase
     }
 
     /**
+     * @dataProvider resolveChromeDriverBinaryDataProvider
+     */
+    public function test_it_can_resolve_chromedriver_binary($os, $expected)
+    {
+        $this->assertSame($expected, OperatingSystem::chromeDriverBinary($os));
+    }
+
+    public function test_it_cant_resolve_invalid_chromedriver_binary()
+    {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Unable to find ChromeDriver binary for Operating System [window_os]');
+
+        OperatingSystem::chromeDriverBinary('window_os');
+    }
+
+    public static function resolveChromeDriverBinaryDataProvider()
+    {
+        yield ['linux', 'chromedriver-linux'];
+        yield ['mac', 'chromedriver-mac'];
+        yield ['mac-intel', 'chromedriver-mac-intel'];
+        yield ['mac-arm', 'chromedriver-mac-arm'];
+        yield ['win', 'chromedriver-win.exe'];
+    }
+
+    /**
      * @dataProvider resolveChromeDriverSlugDataProvider
      */
     public function test_it_can_resolve_chromedriver_slug($version, $os, $expected)

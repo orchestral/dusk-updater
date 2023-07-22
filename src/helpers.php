@@ -2,30 +2,6 @@
 
 namespace Orchestra\DuskUpdater;
 
-use InvalidArgumentException;
-
-/**
- * ChromeDriver name by Operating System.
- *
- * @throws \InvalidArgumentException
- */
-function chromedriver(string $operatingSystem): string
-{
-    $filenames = [
-        'linux' => 'chromedriver-linux',
-        'mac' => 'chromedriver-mac',
-        'mac-intel' => 'chromedriver-mac-intel',
-        'mac-arm' => 'chromedriver-mac-arm',
-        'win' => 'chromedriver-win.exe',
-    ];
-
-    if (is_null($filename = ($filenames[$operatingSystem] ?? null))) {
-        throw new InvalidArgumentException("Unable to find ChromeDriver for Operating System [{$operatingSystem}]");
-    }
-
-    return $filename;
-}
-
 /**
  * Rename exported ChromeDriver binary filename.
  */

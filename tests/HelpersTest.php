@@ -2,38 +2,12 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
-use function Orchestra\DuskUpdater\chromedriver;
 use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 use function Orchestra\DuskUpdater\request_context_payload;
 use PHPUnit\Framework\TestCase;
 
 class HelpersTest extends TestCase
 {
-    /**
-     * @dataProvider resolveChromeDriverDataProvider
-     */
-    public function test_it_can_resolve_chromedriver($os, $expected)
-    {
-        $this->assertSame($expected, chromedriver($os));
-    }
-
-    public function test_it_cant_resolve_invalid_chromedriver()
-    {
-        $this->expectException('InvalidArgumentException');
-        $this->expectExceptionMessage('Unable to find ChromeDriver for Operating System [window_os]');
-
-        chromedriver('window_os');
-    }
-
-    public static function resolveChromeDriverDataProvider()
-    {
-        yield ['linux', 'chromedriver-linux'];
-        yield ['mac', 'chromedriver-mac'];
-        yield ['mac-intel', 'chromedriver-mac-intel'];
-        yield ['mac-arm', 'chromedriver-mac-arm'];
-        yield ['win', 'chromedriver-win.exe'];
-    }
-
     /**
      * @dataProvider chromedriverBinaryFilenameDataProvider
      */

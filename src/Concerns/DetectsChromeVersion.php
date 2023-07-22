@@ -4,7 +4,7 @@ namespace Orchestra\DuskUpdater\Concerns;
 
 use Exception;
 use InvalidArgumentException;
-use function Orchestra\DuskUpdater\chromedriver;
+use Orchestra\DuskUpdater\OperatingSystem;
 use Symfony\Component\Process\Process;
 
 /**
@@ -12,32 +12,6 @@ use Symfony\Component\Process\Process;
  */
 trait DetectsChromeVersion
 {
-    /**
-     * The default commands to detect the installed Chrome/Chromium version.
-     *
-     * @var array
-     */
-    protected $chromeCommands = [
-        'linux' => [
-            '/usr/bin/google-chrome --version',
-            '/usr/bin/chromium-browser --version',
-            '/usr/bin/chromium --version',
-            '/usr/bin/google-chrome-stable --version',
-        ],
-        'mac' => [
-            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
-        ],
-        'mac-intel' => [
-            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
-        ],
-        'mac-arm' => [
-            '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
-        ],
-        'win' => [
-            'reg query "HKEY_CURRENT_USER\Software\Google\Chrome\BLBeacon" /v version',
-        ],
-    ];
-
     /**
      * The legacy versions for the ChromeDriver.
      *
@@ -144,7 +118,7 @@ trait DetectsChromeVersion
 
             $commands = [$directory.' --version'];
         } else {
-            $commands = $this->chromeCommands[$operatingSystem];
+            $commands = OperatingSystem::chromeVersionCommands($operatingSystem);
         }
 
         foreach ($commands as $command) {
@@ -183,7 +157,7 @@ trait DetectsChromeVersion
      */
     protected function installedChromeDriverVersion(string $operatingSystem, string $directory)
     {
-        $filename = chromedriver($operatingSystem);
+        $filename = OperatingSystem::chromeDriverBinary($operatingSystem);
 
         if (! file_exists($directory.$filename)) {
             return [
