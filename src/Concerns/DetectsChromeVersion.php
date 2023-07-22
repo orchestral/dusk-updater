@@ -129,17 +129,17 @@ trait DetectsChromeVersion
     /**
      * Detect the installed Chrome/Chromium version.
      *
-     * @param  string|null  $chromeDirectory
+     * @param  string|null  $directory
      * @return array<string, mixed>
      */
-    protected function installedChromeVersion(string $operatingSystem, $chromeDirectory = null): array
+    protected function installedChromeVersion(string $operatingSystem, $directory = null): array
     {
-        if ($chromeDirectory) {
+        if ($directory) {
             if ($operatingSystem === 'win') {
                 throw new InvalidArgumentException('Chrome version cannot be detected in custom installation path on Windows.');
             }
 
-            $commands = [$chromeDirectory.' --version'];
+            $commands = [$directory.' --version'];
         } else {
             $commands = $this->chromeCommands[$operatingSystem];
         }
@@ -178,7 +178,7 @@ trait DetectsChromeVersion
      *
      * @return array|null
      */
-    protected function installedChromeDriverVersion(string $os, string $driverDirectory)
+    protected function installedChromeDriverVersion(string $os, string $directory)
     {
         $filenames = [
             'linux' => 'chromedriver-linux',
@@ -188,7 +188,7 @@ trait DetectsChromeVersion
             'win' => 'chromedriver-win.exe',
         ];
 
-        if (! file_exists($driverDirectory.$filenames[$os])) {
+        if (! file_exists($directory.$filenames[$os])) {
             return [
                 'full' => null,
                 'semver' => null,
@@ -198,7 +198,7 @@ trait DetectsChromeVersion
             ];
         }
 
-        $command = $driverDirectory.$filenames[$os].' --version';
+        $command = $directory.$filenames[$os].' --version';
         $process = Process::fromShellCommandline($command);
 
         $process->run();
