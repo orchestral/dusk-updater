@@ -4,6 +4,7 @@ namespace Orchestra\DuskUpdater\Concerns;
 
 use Exception;
 use InvalidArgumentException;
+use function Orchestra\DuskUpdater\chromedriver;
 use Symfony\Component\Process\Process;
 
 /**
@@ -180,13 +181,7 @@ trait DetectsChromeVersion
      */
     protected function installedChromeDriverVersion(string $operatingSystem, string $directory)
     {
-        $filenames = [
-            'linux' => 'chromedriver-linux',
-            'mac' => 'chromedriver-mac',
-            'mac-intel' => 'chromedriver-mac-intel',
-            'mac-arm' => 'chromedriver-mac-arm',
-            'win' => 'chromedriver-win.exe',
-        ];
+        $filename = chromedriver($operatingSystem);
 
         if (! file_exists($directory.$filenames[$operatingSystem])) {
             return [

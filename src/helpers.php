@@ -5,16 +5,33 @@ namespace Orchestra\DuskUpdater;
 use InvalidArgumentException;
 
 /**
- * Rename exported ChromeDriver binary filename.
+ * ChromeDriver name by Operating System.
+ *
+ * @throws \InvalidArgumentException
  */
-function rename_chromedriver_binary(string $binary, string $operatingSystem): string
+function chromedriver(string $operatingSystem): string
 {
-    return strpos($binary, DIRECTORY_SEPARATOR) > 0
-        ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
-        : str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
+    $filenames = [
+        'linux' => 'chromedriver-linux',
+        'mac' => 'chromedriver-mac',
+        'mac-intel' => 'chromedriver-mac-intel',
+        'mac-arm' => 'chromedriver-mac-arm',
+        'win' => 'chromedriver-win.exe',
+    ];
+
+    if (is_null($filename = $filenames[$operatingSystem])) {
+        throw new InvalidArgumentException("Unable to find ChromeDriver for Operating System [{$operatingSystem}]");
+    }
+
+    return $filename;
 }
 
-function resolve_chromedriver_slug($version, string $operatingSystem): string
+/**
+ * Determine ChromeDriver slug.
+ *
+ * @throws \InvalidArgumentException
+ */
+function chromedriver_slug($version, string $operatingSystem): string
 {
     $slugs = [
         'linux' => 'linux64',
@@ -22,11 +39,10 @@ function resolve_chromedriver_slug($version, string $operatingSystem): string
         'mac-intel' => 'mac-x64',
         'mac-arm' => 'mac-arm64',
         'win' => 'win32',
-        'win64' => 'win64',
     ];
 
     if (is_null($slug = $slugs[$operatingSystem])) {
-        throw new InvalidArgumentException("Unable to find slug for Operating System [{$operatingSystem}]");
+        throw new InvalidArgumentException("Unable to find ChromeDriver slug for Operating System [{$operatingSystem}]");
     }
 
     if (version_compare($version, '115.0', '<')) {
@@ -38,6 +54,16 @@ function resolve_chromedriver_slug($version, string $operatingSystem): string
     }
 
     return $slug;
+}
+
+/**
+ * Rename exported ChromeDriver binary filename.
+ */
+function rename_chromedriver_binary(string $binary, string $operatingSystem): string
+{
+    return strpos($binary, DIRECTORY_SEPARATOR) > 0
+        ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
+        : str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
 }
 
 /**
