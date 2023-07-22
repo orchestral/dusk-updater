@@ -18,6 +18,14 @@ class HelpersTest extends TestCase
         $this->assertSame($expected, chromedriver($os));
     }
 
+    public function test_it_cant_resolve_invalid_chromedriver()
+    {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Unable to find ChromeDriver for Operating System [window_os]');
+
+       chromedriver('window_os');
+    }
+
     public static function resolveChromeDriverDataProvider()
     {
         yield ['linux', 'chromedriver-linux'];

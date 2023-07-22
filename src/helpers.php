@@ -19,7 +19,7 @@ function chromedriver(string $operatingSystem): string
         'win' => 'chromedriver-win.exe',
     ];
 
-    if (is_null($filename = $filenames[$operatingSystem])) {
+    if (is_null($filename = ($filenames[$operatingSystem] ?? null))) {
         throw new InvalidArgumentException("Unable to find ChromeDriver for Operating System [{$operatingSystem}]");
     }
 
