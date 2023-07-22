@@ -2,9 +2,11 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
-use function Orchestra\DuskUpdater\chromedriver_binary_filename;
-use function Orchestra\DuskUpdater\request_context_payload;
-use function Orchestra\DuskUpdater\resolve_chromedriver_slug;
+use function Orchestra\DuskUpdater\{
+    rename_chromedriver_binary,
+    request_context_payload,
+    resolve_chromedriver_slug
+};
 use PHPUnit\Framework\TestCase;
 
 class HelpersTest extends TestCase
@@ -12,9 +14,9 @@ class HelpersTest extends TestCase
     /**
      * @dataProvider chromedriverBinaryFilenameDataProvider
      */
-    public function test_it_can_resolve_chromedriver_binary_filename($os, $given, $expected)
+    public function test_it_can_resolve_rename_chromedriver_binary($os, $given, $expected)
     {
-        $this->assertSame(chromedriver_binary_filename($given, $os), $expected);
+        $this->assertSame(rename_chromedriver_binary($given, $os), $expected);
     }
 
     public static function chromedriverBinaryFilenameDataProvider()

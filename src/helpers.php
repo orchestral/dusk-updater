@@ -5,9 +5,9 @@ namespace Orchestra\DuskUpdater;
 use InvalidArgumentException;
 
 /**
- * Define ChromeDriver binary filename.
+ * Rename exported ChromeDriver binary filename.
  */
-function chromedriver_binary_filename(string $binary, string $operatingSystem): string
+function rename_chromedriver_binary(string $binary, string $operatingSystem): string
 {
     return strpos($binary, DIRECTORY_SEPARATOR) > 0
         ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
