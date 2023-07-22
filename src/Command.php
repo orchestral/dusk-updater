@@ -3,8 +3,6 @@
 namespace Orchestra\DuskUpdater;
 
 use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Utils;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -27,7 +25,7 @@ class Command extends SymfonyCommand
     /**
      * Determine SSL certification verification.
      */
-    protected bool $withoutSslVerification = false;
+    protected bool $withSslVerification = true;
 
     /**
      * Configure the command options.
@@ -64,30 +62,17 @@ class Command extends SymfonyCommand
     {
         $this->directory = $input->getOption('install-dir');
         $this->httpProxy = $input->getOption('proxy');
-        $this->withoutSslVerification = $input->getOption('ssl-no-verify') === true;
+        $this->withSslVerification = $input->getOption('ssl-no-verify') === false;
     }
 
-     /**
+    /**
      * Download contents from URL and save it to specific location.
      *
      * @throws \Exception
      */
     protected function fetchDownload(string $url, string $destination): void
     {
-        $client = new Client();
-
-        $resource = Utils::tryFopen($destination, 'w');
-
-        $response = $client->get($url, array_merge([
-            'verify' => $this->withoutSslVerification === false,
-            'sink' => $resource,
-        ], array_filter([
-            'proxy' => $this->httpProxy,
-        ])));
-
-        if ($response->getStatusCode() < 200 || $response->getStatusCode() > 299) {
-            throw new Exception("Unable to fetch contents from [{$url}]");
-        }
+        download($url, $destination, $this->httpProxy, $this->withSslVerification);
     }
 
     /**
@@ -97,19 +82,7 @@ class Command extends SymfonyCommand
      */
     protected function fetchUrl(string $url): string
     {
-        $client = new Client();
-
-        $response = $client->get($url, array_merge([
-            'verify' => $this->withoutSslVerification === false
-        ], array_filter([
-            'proxy' => $this->httpProxy,
-        ])));
-
-        if ($response->getStatusCode() < 200 || $response->getStatusCode() > 299) {
-            throw new Exception("Unable to fetch contents from [{$url}]");
-        }
-
-        return (string) $response->getBody();
+        return fetch($url, $this->httpProxy, $this->withSslVerification);
     }
 
     /**
