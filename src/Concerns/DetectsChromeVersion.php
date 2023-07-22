@@ -13,41 +13,6 @@ use Symfony\Component\Process\Process;
 trait DetectsChromeVersion
 {
     /**
-     * The legacy versions for the ChromeDriver.
-     *
-     * @var array<int, string>
-     */
-    protected array $legacyVersions = [
-        43 => '2.20',
-        44 => '2.20',
-        45 => '2.20',
-        46 => '2.21',
-        47 => '2.21',
-        48 => '2.21',
-        49 => '2.22',
-        50 => '2.22',
-        51 => '2.23',
-        52 => '2.24',
-        53 => '2.26',
-        54 => '2.27',
-        55 => '2.28',
-        56 => '2.29',
-        57 => '2.29',
-        58 => '2.31',
-        59 => '2.32',
-        60 => '2.33',
-        61 => '2.34',
-        62 => '2.35',
-        63 => '2.36',
-        64 => '2.37',
-        65 => '2.38',
-        66 => '2.40',
-        67 => '2.41',
-        68 => '2.42',
-        69 => '2.44',
-    ];
-
-    /**
      * Find selected ChromeDriver version URL.
      *
      * @throws \Exception
@@ -64,9 +29,7 @@ trait DetectsChromeVersion
 
         $version = (int) $version;
 
-        if ($version < 70) {
-            return $this->legacyVersions[$version];
-        } elseif ($version < 115) {
+        if ($version < 115) {
             return $this->fetchChromeVersionFromUrl($version);
         }
 
