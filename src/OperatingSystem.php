@@ -2,6 +2,7 @@
 
 namespace Orchestra\DuskUpdater;
 
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class OperatingSystem
@@ -142,7 +143,7 @@ class OperatingSystem
             return PHP_OS_FAMILY === 'Windows';
         }
 
-        return PHP_OS === 'WINNT' || mb_strpos(php_uname(), 'Microsoft') !== false;
+        return PHP_OS === 'WINNT' || Str::contains(php_uname(), 'Microsoft');
     }
 
     /**
