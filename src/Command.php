@@ -65,7 +65,7 @@ class Command extends SymfonyCommand
     {
         $this->directory = $input->getOption('install-dir');
         $this->httpProxy = $input->getOption('proxy');
-        $this->withoutSslVerification = $input->getOption('ssl-no-verify') === false;
+        $this->withoutSslVerification = $input->getOption('ssl-no-verify') === true;
     }
 
     /**
@@ -76,22 +76,9 @@ class Command extends SymfonyCommand
      */
     protected function fetchUrl(string $url): string
     {
-        $streamOptions = [];
-
-        if ($this->withoutSslVerification === false) {
-            $streamOptions = [
-                'ssl' => [
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                ],
-            ];
-        }
-
-        if (! empty($this->httpProxy)) {
-            $streamOptions['http'] = ['proxy' => $this->httpProxy, 'request_fulluri' => true];
-        }
-
-        $contents = @file_get_contents($url, false, stream_context_create($streamOptions));
+        $contents = @file_get_contents(
+            $url, false, stream_context_create(request_context_payload($this->httpProxy, $this->withoutSslVerification))
+        );
 
         if (\is_string($contents)) {
             return $contents;

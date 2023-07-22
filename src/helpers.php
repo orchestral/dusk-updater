@@ -21,7 +21,7 @@ function request_context_payload($proxy = null, bool $without_ssl_verification =
 {
     $streamOptions = [];
 
-    if ($without_ssl_verification === false) {
+    if ($without_ssl_verification === true) {
         $streamOptions = [
             'ssl' => [
                 'verify_peer' => false,
