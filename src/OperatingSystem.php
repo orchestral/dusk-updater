@@ -26,6 +26,7 @@ class OperatingSystem
             'slug' => 'mac-x64',
             'binary' => 'chromedriver-mac',
             'commands' => [
+                '/Applications/Google\ Chrome\ for\ Testing.app/Contents/MacOS/Google\ Chrome\ for\ Testing --version',
                 '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
             ],
         ],
@@ -33,6 +34,7 @@ class OperatingSystem
             'slug' => 'mac-x64',
             'binary' => 'chromedriver-mac-intel',
             'commands' => [
+                '/Applications/Google\ Chrome\ for\ Testing.app/Contents/MacOS/Google\ Chrome\ for\ Testing --version',
                 '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
             ],
         ],
@@ -40,6 +42,7 @@ class OperatingSystem
             'slug' => 'mac-arm64',
             'binary' => 'chromedriver-mac-arm',
             'commands' => [
+                '/Applications/Google\ Chrome\ for\ Testing.app/Contents/MacOS/Google\ Chrome\ for\ Testing --version',
                 '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version',
             ],
         ],
