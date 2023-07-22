@@ -5,15 +5,14 @@ namespace Orchestra\DuskUpdater;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Utils;
-use Illuminate\Support\Str;
 
 /**
  * Rename exported ChromeDriver binary filename.
  */
 function rename_chromedriver_binary(string $binary, string $operatingSystem): string
 {
-    return Str::contains($binary, DIRECTORY_SEPARATOR)
-        ? Str::after(str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), DIRECTORY_SEPARATOR)
+    return mb_strpos($binary, DIRECTORY_SEPARATOR) > 0
+        ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
         : str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
 }
 

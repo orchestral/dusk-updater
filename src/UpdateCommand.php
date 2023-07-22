@@ -72,7 +72,7 @@ class UpdateCommand extends Command
         $url = $this->resolveChromeDriverDownloadUrl($version, $operatingSystem);
 
         try {
-            $this->fetchDownload($url, $archive = $this->directory.'chromedriver.zip');
+            download($url, $archive = $this->directory.'chromedriver.zip', $this->httpProxy, $this->withSslVerification);
         } catch (Exception $e) {
             throw new RuntimeException("Unable to retrieve ChromeDriver [{$version}].");
         }

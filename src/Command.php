@@ -66,16 +66,6 @@ class Command extends SymfonyCommand
     }
 
     /**
-     * Download contents from URL and save it to specific location.
-     *
-     * @throws \Exception
-     */
-    protected function fetchDownload(string $url, string $destination): void
-    {
-        download($url, $destination, $this->httpProxy, $this->withSslVerification);
-    }
-
-    /**
      * Get contents from URL.
      *
      * @throws \Exception
@@ -106,7 +96,12 @@ class Command extends SymfonyCommand
         $chromedrivers = $versions['milestones'][$milestone]['downloads']['chromedriver']
             ?? throw new Exception('Could not get the ChromeDriver version.');
 
-        return collect($chromedrivers)->firstWhere('platform', $slug)['url']
-            ?? throw new Exception('Could not get the ChromeDriver version.');
+        foreach ($chromedrivers as $chromedriver) {
+            if ($chromedriver['platform'] === $slug) {
+                return $chromedriver['url'];
+            }
+        }
+
+        throw new Exception('Could not get the ChromeDriver version.');
     }
 }
