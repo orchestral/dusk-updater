@@ -100,9 +100,8 @@ trait DetectsChromeVersion
 
         $milestones = $this->resolveChromeVersionsPerMilestone();
 
-        $milestoneVersion = $milestones['milestones'][$version]['version'] ?? null;
-
-        if (is_null($milestoneVersion)) {
+        /** @var string|null $milestoneVersion */
+        if (is_null($milestoneVersion = ($milestones['milestones'][$version]['version'] ?? null))) {
             throw new Exception('Could not get the ChromeDriver version.');
         }
 
@@ -118,9 +117,8 @@ trait DetectsChromeVersion
     {
         $versions = json_decode($this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'), true);
 
-        $version = $versions['channels']['Stable']['version'] ?? null;
-
-        if (is_null($version)) {
+        /** @var string|null $version */
+        if (is_null($version = ($versions['channels']['Stable']['version'] ?? null))) {
             throw new Exception('Could not get the latest ChromeDriver version.');
         }
 
