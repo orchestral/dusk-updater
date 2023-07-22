@@ -28,7 +28,7 @@ class UpdateCommandTest extends TestCase
 
         $this->assertStringContainsString(
             OperatingSystem::onWindows()
-                ? "ChromeDriver binary successfully installed for version 108.0.5359.71."
+                ? "ChromeDriver binary successfully installed for version 108.0.5359.71.".PHP_EOL
                 : "ChromeDriver binary successfully installed for version 108.0.5359.71.\n",
             $output
         );
