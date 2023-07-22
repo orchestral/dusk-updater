@@ -28,10 +28,11 @@ class OperatingSystemTest extends TestCase
         foreach (OperatingSystem::all() as $os) {
             $commands = OperatingSystem::chromeVersionCommands($os);
 
-            $this->assertTrue(is_array($commands), 'Commands should be an array');
+            $this->assertTrue(\is_array($commands), 'Commands should be an array');
             $this->assertFalse(empty($commands), 'Commands should not be empty');
         }
     }
+
     public function test_it_cant_resolve_invalid_chrome_version_commands()
     {
         $this->expectException('InvalidArgumentException');
