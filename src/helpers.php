@@ -7,7 +7,7 @@ namespace Orchestra\DuskUpdater;
  */
 function rename_chromedriver_binary(string $binary, string $operatingSystem): string
 {
-    return strpos($binary, DIRECTORY_SEPARATOR) > 0
+    return mb_strpos($binary, DIRECTORY_SEPARATOR) > 0
         ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
         : str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
 }
