@@ -101,7 +101,9 @@ trait DetectsChromeVersion
         $milestones = $this->resolveChromeVersionsPerMilestone();
 
         /** @var string|null $milestoneVersion */
-        if (is_null($milestoneVersion = ($milestones['milestones'][$version]['version'] ?? null))) {
+        $milestoneVersion = $milestones['milestones'][$version]['version'] ?? null;
+
+        if (is_null($milestoneVersion)) {
             throw new Exception('Could not get the ChromeDriver version.');
         }
 
@@ -118,7 +120,9 @@ trait DetectsChromeVersion
         $versions = json_decode($this->fetchUrl('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'), true);
 
         /** @var string|null $version */
-        if (is_null($version = ($versions['channels']['Stable']['version'] ?? null))) {
+        $version = $versions['channels']['Stable']['version'] ?? null;
+
+        if (is_null($version)) {
             throw new Exception('Could not get the latest ChromeDriver version.');
         }
 
@@ -181,7 +185,7 @@ trait DetectsChromeVersion
     {
         $filename = chromedriver($operatingSystem);
 
-        if (! file_exists($directory.$filenames[$operatingSystem])) {
+        if (! file_exists($directory.$filename)) {
             return [
                 'full' => null,
                 'semver' => null,
@@ -191,7 +195,7 @@ trait DetectsChromeVersion
             ];
         }
 
-        $command = $directory.$filenames[$operatingSystem].' --version';
+        $command = $directory.$filename.' --version';
         $process = Process::fromShellCommandline($command);
 
         $process->run();

@@ -31,7 +31,7 @@ function chromedriver(string $operatingSystem): string
  *
  * @throws \InvalidArgumentException
  */
-function chromedriver_slug($version, string $operatingSystem): string
+function chromedriver_slug(string $version, string $operatingSystem): string
 {
     $slugs = [
         'linux' => 'linux64',
