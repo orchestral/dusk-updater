@@ -78,7 +78,7 @@ trait DetectsChromeVersion
         $milestoneVersion = $milestones['milestones'][$version]['version'] ?? null;
 
         if (is_null($milestoneVersion)) {
-            throw new Exception('Could not get the ChromeDriver version.');
+            throw new Exception('Could not determine the ChromeDriver version.');
         }
 
         return $milestoneVersion;
