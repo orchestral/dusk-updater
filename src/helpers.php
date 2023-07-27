@@ -11,9 +11,13 @@ use GuzzleHttp\Psr7\Utils;
  */
 function rename_chromedriver_binary(string $binary, string $operatingSystem): string
 {
-    return mb_strpos($binary, DIRECTORY_SEPARATOR) > 0
-        ? array_reverse(explode(DIRECTORY_SEPARATOR, str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0]
-        : str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
+    $binary = str_replace(DIRECTORY_SEPARATOR, '/', $binary);
+
+    if (mb_strpos($binary, '/') > 0) {
+        return array_reverse(explode('/', str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary), 2))[0];
+    }
+
+    return str_replace('chromedriver', 'chromedriver-'.$operatingSystem, $binary);
 }
 
 /**
