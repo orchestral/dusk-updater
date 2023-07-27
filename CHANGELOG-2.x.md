@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.2.1
+
+Released: 2023-07-27
+
+### Fixes
+
+*  Normalize directory separator when renaming ChromeDriver binary.
+
 ## 2.2.0
 
 Released: 2023-07-22
