@@ -26,5 +26,6 @@ class HelpersTest extends TestCase
         yield ['mac-intel', 'chromedriver-115/chromedriver', 'chromedriver-mac-intel'];
         yield ['mac-arm', 'chromedriver-115/chromedriver', 'chromedriver-mac-arm'];
         yield ['win', 'chromedriver-115/chromedriver.exe', 'chromedriver-win.exe'];
+        yield ['win', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver.exe', 'chromedriver-win.exe'];
     }
 }
