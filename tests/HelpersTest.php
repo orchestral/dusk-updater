@@ -2,8 +2,9 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
-use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 use PHPUnit\Framework\TestCase;
+
+use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 
 class HelpersTest extends TestCase
 {
