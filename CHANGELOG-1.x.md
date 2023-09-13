@@ -2,13 +2,21 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 1.8.0
+
+Released: 2023-09-13
+
+### Added
+ 
+* Added PHP and Platform information on `detect` command.
+
 ## 1.7.1
 
 Released: 2023-07-27
 
 ### Fixes
 
-*  Normalize directory separator when renaming ChromeDriver binary.
+* Normalize directory separator when renaming ChromeDriver binary.
 
 ## 1.7.0
 
