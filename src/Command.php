@@ -55,8 +55,6 @@ class Command extends SymfonyCommand
      *
      * @see InputInterface::bind()
      * @see InputInterface::validate()
-     *
-     * @return void
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
