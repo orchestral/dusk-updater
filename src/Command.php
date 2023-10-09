@@ -58,7 +58,7 @@ class Command extends SymfonyCommand
      *
      * @return void
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->directory = $input->getOption('install-dir');
         $this->httpProxy = $input->getOption('proxy');
