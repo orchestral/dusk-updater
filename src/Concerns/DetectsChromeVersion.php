@@ -36,7 +36,7 @@ trait DetectsChromeVersion
         $milestones = $this->resolveChromeVersionsPerMilestone();
 
         return $milestones['milestones'][$version]['version']
-            ?? throw new Exception('Could not get the ChromeDriver version.');
+            ?? throw new Exception('Could not determine the ChromeDriver version.');
     }
 
     /**

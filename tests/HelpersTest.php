@@ -2,8 +2,9 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
-use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 use PHPUnit\Framework\TestCase;
+
+use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 
 class HelpersTest extends TestCase
 {
@@ -22,9 +23,10 @@ class HelpersTest extends TestCase
         yield ['mac-arm', 'chromedriver', 'chromedriver-mac-arm'];
         yield ['win', 'chromedriver.exe', 'chromedriver-win.exe'];
 
-        yield ['linux', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver', 'chromedriver-linux'];
-        yield ['mac-intel', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver', 'chromedriver-mac-intel'];
-        yield ['mac-arm', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver', 'chromedriver-mac-arm'];
+        yield ['linux', 'chromedriver-115/chromedriver', 'chromedriver-linux'];
+        yield ['mac-intel', 'chromedriver-115/chromedriver', 'chromedriver-mac-intel'];
+        yield ['mac-arm', 'chromedriver-115/chromedriver', 'chromedriver-mac-arm'];
+        yield ['win', 'chromedriver-115/chromedriver.exe', 'chromedriver-win.exe'];
         yield ['win', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver.exe', 'chromedriver-win.exe'];
     }
 }

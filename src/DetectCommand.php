@@ -50,6 +50,8 @@ class DetectCommand extends Command
             isset($chromeVersions['semver']) ? $chromeVersions['semver'] : ''
         );
 
+        $io->block(sprintf('Running PHP %s on Platform [%s]', PHP_VERSION, $currentOS));
+
         $io->table(['Tool', 'Version'], [
             ['Chrome/Chromium', $chromeVersions['semver'] ?? '<fg=yellow>✖ N/A</>'],
             ['ChromeDriver', $driverVersions['semver'] ?? '<fg=yellow>✖ N/A</>'],
