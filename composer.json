@@ -61,5 +61,6 @@
         ],
         "test": "@php vendor/bin/phpunit -c ./ --color"
     },
-    "minimum-stability": "stable"
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }
