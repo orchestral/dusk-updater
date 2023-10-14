@@ -58,7 +58,9 @@ class Command extends SymfonyCommand
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->directory = $input->getOption('install-dir');
+        $directory = $input->getOption('install-dir');
+
+        $this->directory = ! empty($directory) ? rtrim($directory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR : null;
         $this->httpProxy = $input->getOption('proxy');
         $this->withSslVerification = $input->getOption('ssl-no-verify') === false;
     }
