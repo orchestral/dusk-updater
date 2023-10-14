@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.4.0
+
+Released: 2023-10-14
+
+### Added
+
+* Added support for Symfony 7.
+
 ## 2.3.0
 
 Released: 2023-09-13

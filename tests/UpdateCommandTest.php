@@ -22,6 +22,7 @@ class UpdateCommandTest extends TestCase
         $commandTester->execute([
             'command' => $command->getName(),
             'version' => '108.0.5359.71',
+            '--install-dir' => __DIR__.'/tmp',
         ]);
 
         $output = $commandTester->getDisplay();
@@ -46,6 +47,7 @@ class UpdateCommandTest extends TestCase
         $commandTester->execute([
             'command' => $command->getName(),
             'version' => '108',
+            '--install-dir' => __DIR__.'/tmp',
         ]);
 
         $output = $commandTester->getDisplay();
@@ -67,6 +69,7 @@ class UpdateCommandTest extends TestCase
         $commandTester->execute([
             'command' => $command->getName(),
             'version' => '74.0.3729',
+            '--install-dir' => __DIR__.'/tmp',
         ]);
     }
 }
