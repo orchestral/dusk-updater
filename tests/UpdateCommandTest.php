@@ -4,13 +4,14 @@ namespace Orchestra\DuskUpdater\Tests;
 
 use Orchestra\DuskUpdater\OperatingSystem;
 use Orchestra\DuskUpdater\UpdateCommand;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class UpdateCommandTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_update_to_specific_version()
     {
         $app = new Application('Dusk Updater', '1.0.0');
@@ -35,7 +36,7 @@ class UpdateCommandTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_update_to_major_version()
     {
         $app = new Application('Dusk Updater', '1.0.0');
@@ -54,7 +55,7 @@ class UpdateCommandTest extends TestCase
         $this->assertStringContainsString('ChromeDriver binary successfully installed for version 108', $output);
     }
 
-    /** @test */
+    #[Test]
     public function it_cant_update_to_invalid_version()
     {
         $this->expectException('RuntimeException');

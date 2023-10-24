@@ -2,16 +2,17 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 
 class HelpersTest extends TestCase
 {
-    /**
-     * @dataProvider chromedriverBinaryFilenameDataProvider
-     */
-    public function test_it_can_rename_chromedriver_binary($os, $given, $expected)
+    #[Test]
+    #[DataProvider('chromedriverBinaryFilenameDataProvider')]
+    public function it_can_rename_chromedriver_binary($os, $given, $expected)
     {
         $this->assertSame(rename_chromedriver_binary($given, $os), $expected);
     }

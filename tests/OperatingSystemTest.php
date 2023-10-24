@@ -3,16 +3,20 @@
 namespace Orchestra\DuskUpdater\Tests;
 
 use Orchestra\DuskUpdater\OperatingSystem;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class OperatingSystemTest extends TestCase
 {
-    public function test_it_matches_possible_os()
+    #[Test]
+    public function it_matches_possible_os()
     {
         $this->assertTrue(\in_array(OperatingSystem::id(), OperatingSystem::all()));
     }
 
-    public function test_it_has_correct_os()
+    #[Test]
+    public function it_has_correct_os()
     {
         $this->assertSame([
             'linux',
@@ -23,7 +27,8 @@ class OperatingSystemTest extends TestCase
         ], OperatingSystem::all());
     }
 
-    public function test_it_can_resolve_chrome_version_commands()
+    #[Test]
+    public function it_can_resolve_chrome_version_commands()
     {
         foreach (OperatingSystem::all() as $os) {
             $commands = OperatingSystem::chromeVersionCommands($os);
@@ -33,7 +38,8 @@ class OperatingSystemTest extends TestCase
         }
     }
 
-    public function test_it_cant_resolve_invalid_chrome_version_commands()
+    #[Test]
+    public function it_cant_resolve_invalid_chrome_version_commands()
     {
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Unable to find commands for Operating System [window_os]');
@@ -41,15 +47,15 @@ class OperatingSystemTest extends TestCase
         OperatingSystem::chromeVersionCommands('window_os');
     }
 
-    /**
-     * @dataProvider resolveChromeDriverBinaryDataProvider
-     */
-    public function test_it_can_resolve_chromedriver_binary($os, $expected)
+    #[Test]
+    #[DataProvider('resolveChromeDriverBinaryDataProvider')]
+    public function it_can_resolve_chromedriver_binary($os, $expected)
     {
         $this->assertSame($expected, OperatingSystem::chromeDriverBinary($os));
     }
 
-    public function test_it_cant_resolve_invalid_chromedriver_binary()
+    #[Test]
+    public function it_cant_resolve_invalid_chromedriver_binary()
     {
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Unable to find ChromeDriver binary for Operating System [window_os]');
@@ -66,15 +72,15 @@ class OperatingSystemTest extends TestCase
         yield ['win', 'chromedriver-win.exe'];
     }
 
-    /**
-     * @dataProvider resolveChromeDriverSlugDataProvider
-     */
-    public function test_it_can_resolve_chromedriver_slug($version, $os, $expected)
+    #[Test]
+    #[DataProvider('resolveChromeDriverSlugDataProvider')]
+    public function it_can_resolve_chromedriver_slug($version, $os, $expected)
     {
         $this->assertSame($expected, OperatingSystem::chromeDriverSlug($os, $version));
     }
 
-    public function test_it_cant_resolve_invalid_chromedriver_slug()
+    #[Test]
+    public function it_cant_resolve_invalid_chromedriver_slug()
     {
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Unable to find ChromeDriver slug for Operating System [window_os]');
