@@ -3,6 +3,7 @@
 namespace Orchestra\DuskUpdater;
 
 use Composer\Semver\Comparator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
  */
+#[AsCommand(name: 'detect', description: 'Detect the installed Chrome/Chromium version')]
 class DetectCommand extends Command
 {
     /**
@@ -19,9 +21,7 @@ class DetectCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('detect')
-            ->setDescription('Detect the installed Chrome/Chromium version.')
-            ->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
+        $this->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
             ->addOption('auto-update', null, InputOption::VALUE_NONE, 'Auto update ChromeDriver binary if outdated');
 
         parent::configure();
