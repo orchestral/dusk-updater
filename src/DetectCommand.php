@@ -17,6 +17,7 @@ class DetectCommand extends Command
     /**
      * Configure the command options.
      */
+    #[\Override]
     protected function configure(): void
     {
         $this->setName('detect')
@@ -32,6 +33,7 @@ class DetectCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
