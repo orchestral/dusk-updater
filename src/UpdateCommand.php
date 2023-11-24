@@ -18,6 +18,7 @@ class UpdateCommand extends Command
     /**
      * Configure the command options.
      */
+    #[\Override]
     protected function configure(): void
     {
         $this->setName('update')
@@ -33,6 +34,7 @@ class UpdateCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $version = $this->version($input);

@@ -30,6 +30,7 @@ class Command extends SymfonyCommand
     /**
      * Configure the command options.
      */
+    #[\Override]
     protected function configure(): void
     {
         $this->ignoreValidationErrors();
@@ -56,6 +57,7 @@ class Command extends SymfonyCommand
      * @see InputInterface::bind()
      * @see InputInterface::validate()
      */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $directory = $input->getOption('install-dir');
