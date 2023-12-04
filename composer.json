@@ -38,13 +38,13 @@
         "guzzlehttp/guzzle": "^7.2",
         "symfony/console": "^6.0 || ^7.0",
         "symfony/polyfill-ctype": "^1.9",
+        "symfony/polyfill-php83": "^1.28",
         "symfony/process": "^6.0 || ^7.0"
     },
     "require-dev": {
         "laravel/pint": "^1.4",
         "phpstan/phpstan": "^1.10.7",
-        "phpunit/phpunit": "^9.6",
-        "symfony/polyfill-php83": "^1.28"
+        "phpunit/phpunit": "^9.6"
     },
     "config": {
         "sort-packages": true
