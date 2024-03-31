@@ -4,6 +4,7 @@ namespace Orchestra\DuskUpdater;
 
 use Exception;
 use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -13,6 +14,7 @@ use ZipArchive;
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
  */
+#[AsCommand(name: 'update', description: 'Install the ChromeDriver binary.')]
 class UpdateCommand extends Command
 {
     /**
