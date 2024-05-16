@@ -43,7 +43,7 @@
     },
     "require-dev": {
         "laravel/pint": "^1.4",
-        "phpstan/phpstan": "^1.10.7",
+        "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^9.6"
     },
     "config": {
@@ -55,11 +55,15 @@
         }
     },
     "scripts": {
-        "ci": [
-            "@php vendor/bin/phpstan analyse",
-            "@php vendor/bin/pint"
+        "lint": [
+            "@php vendor/bin/pint",
+            "@php vendor/bin/phpstan analyse --verbose"
         ],
-        "test": "@php vendor/bin/phpunit -c ./ --color"
+        "test": "@php vendor/bin/phpunit -c ./ --color",
+        "ci": [
+            "@lint",
+            "@test"
+        ]
     },
     "prefer-stable": true,
     "minimum-stability": "dev"
