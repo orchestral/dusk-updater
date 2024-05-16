@@ -23,7 +23,6 @@ function rename_chromedriver_binary(string $binary, string $operatingSystem): st
 /**
  * Download from URL.
  *
- *
  * @throws \Exception
  */
 function download(string $url, string $destination, ?string $proxy = null, bool $verifySsl = true): void
@@ -46,7 +45,6 @@ function download(string $url, string $destination, ?string $proxy = null, bool 
 
 /**
  * Get contents from URL.
- *
  *
  * @throws \Exception
  */

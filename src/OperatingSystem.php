@@ -162,13 +162,10 @@ class OperatingSystem
      */
     public static function macArchitectureId(): string
     {
-        switch (php_uname('m')) {
-            case 'arm64':
-                return 'mac-arm';
-            case 'x86_64':
-                return 'mac-intel';
-            default:
-                return 'mac';
-        }
+        return match (php_uname('m')) {
+            'arm64' => 'mac-arm',
+            'x86_64' => 'mac-intel',
+            default => 'mac',
+        };
     }
 }
