@@ -27,7 +27,7 @@ function rename_chromedriver_binary(string $binary, string $operatingSystem): st
  */
 function download(string $url, string $destination, ?string $proxy = null, bool $verifySsl = true): void
 {
-    $client = new Client();
+    $client = new Client;
 
     $resource = Utils::tryFopen($destination, 'w');
 

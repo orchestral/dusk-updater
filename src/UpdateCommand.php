@@ -95,7 +95,7 @@ class UpdateCommand extends Command
             throw new RuntimeException("Unable to extract {$archive} without --install-dir");
         }
 
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
 
         $zip->open($archive);
 
