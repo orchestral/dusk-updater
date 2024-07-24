@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.5.0
+
+Released: 2024-07-24
+
+### Changes
+
+* Added support to download ChromeDriver `127`.
+
 ## 2.4.0
 
 Released: 2023-10-14
