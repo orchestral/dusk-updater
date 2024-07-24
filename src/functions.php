@@ -50,7 +50,7 @@ function download(string $url, string $destination, ?string $proxy = null, bool 
  */
 function fetch(string $url, ?string $proxy = null, bool $verifySsl = true): string
 {
-    $client = new Client();
+    $client = new Client;
 
     $response = $client->get($url, array_merge([
         'verify' => $verifySsl,
