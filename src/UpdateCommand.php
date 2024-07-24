@@ -101,16 +101,11 @@ class UpdateCommand extends Command
 
         $zip->extractTo($this->directory);
 
-        switch (true) {
-            case version_compare($version, '115.0', '<'):
-                $index = 0;
-                break;
-            case version_compare($version, '127.0', '<'):
-                $index = 1;
-                break;
-            default:
-                $index = 2;
-        }
+        $index = match (true) {
+            version_compare($version, '115.0', '<') => 0,
+            version_compare($version, '127.0', '<') => 1,
+            default => 2,
+        };
 
         $binary = $zip->getNameIndex($index);
 
