@@ -94,7 +94,7 @@ class UpdateCommand extends Command
 
         $binary = null;
 
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
 
         $zip->open($archive);
 
