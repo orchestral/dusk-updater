@@ -3,6 +3,7 @@
 namespace Orchestra\DuskUpdater;
 
 use Exception;
+use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -91,24 +92,26 @@ class UpdateCommand extends Command
             throw new RuntimeException("Unable to extract {$archive} without --install-dir");
         }
 
+        $binary = null;
+
         $zip = new ZipArchive();
 
         $zip->open($archive);
 
         $zip->extractTo($this->directory);
 
-        switch (true) {
-            case version_compare($version, '115.0', '<'):
-                $index = 0;
-                break;
-            case version_compare($version, '127.0', '<'):
-                $index = 1;
-                break;
-            default:
-                $index = 2;
-        }
+        for ($fileIndex = 0; $fileIndex < $zip->numFiles; $fileIndex++) {
+            /** @var string $filename */
+            $filename = $zip->getNameIndex($fileIndex);
 
-        $binary = $zip->getNameIndex($index);
+            if (Str::startsWith(basename($filename), 'chromedriver')) {
+                $binary = $filename;
+
+                $zip->extractTo($this->directory, $binary);
+
+                break;
+            }
+        }
 
         $zip->close();
 
