@@ -101,6 +101,7 @@ class UpdateCommand extends Command
         $zip->extractTo($this->directory);
 
         for ($fileIndex = 0; $fileIndex < $zip->numFiles; $fileIndex++) {
+            /** @var string $filename */
             $filename = $zip->getNameIndex($fileIndex);
 
             if (Str::startsWith(basename($filename), 'chromedriver')) {
