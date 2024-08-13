@@ -40,9 +40,12 @@
         "symfony/process": "^4.3.4 || ^5.0 || ^6.0"
     },
     "require-dev": {
-        "laravel/dusk": "^6.0 || ^7.0",
+        "laravel/dusk": "^5.8.2 || ^6.0 || ^7.0 || ^8.0",
         "phpstan/phpstan": "^1.10.7",
         "phpunit/phpunit": "^9.6"
+    },
+    "conflict": {
+        "laravel/dusk": ">=9.0.0"
     },
     "config": {
         "sort-packages": true
