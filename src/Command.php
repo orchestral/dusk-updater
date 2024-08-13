@@ -87,7 +87,7 @@ class Command extends SymfonyCommand
         $slug = OperatingSystem::chromeDriverSlug($operatingSystem, $version);
 
         if (version_compare($version, '115.0', '<')) {
-            return sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);
+            return \sprintf('https://chromedriver.storage.googleapis.com/%s/chromedriver_%s.zip', $version, $slug);
         }
 
         $milestone = (int) $version;

@@ -184,7 +184,7 @@ trait DetectsChromeVersion
     protected function fetchChromeVersionFromUrl(int $version): string
     {
         return trim((string) $this->fetchUrl(
-            sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
+            \sprintf('https://chromedriver.storage.googleapis.com/LATEST_RELEASE_%d', $version)
         ));
     }
 

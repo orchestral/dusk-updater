@@ -51,7 +51,7 @@ class UpdateCommand extends Command
             }
         }
 
-        $output->writeln(sprintf(
+        $output->writeln(\sprintf(
             '<info>ChromeDriver %s successfully installed for version %s.</info>', $all ? 'binaries' : 'binary', $version
         ));
 
@@ -95,19 +95,26 @@ class UpdateCommand extends Command
             throw new RuntimeException("Unable to extract {$archive} without --install-dir");
         }
 
+        $binary = null;
+
         $zip = new ZipArchive;
 
         $zip->open($archive);
 
         $zip->extractTo($this->directory);
 
-        $index = match (true) {
-            version_compare($version, '115.0', '<') => 0,
-            version_compare($version, '127.0', '<') => 1,
-            default => 2,
-        };
+        for ($fileIndex = 0; $fileIndex < $zip->numFiles; $fileIndex++) {
+            /** @var string $filename */
+            $filename = $zip->getNameIndex($fileIndex);
 
-        $binary = $zip->getNameIndex($index);
+            if (str_starts_with(basename($filename), 'chromedriver')) {
+                $binary = $filename;
+
+                $zip->extractTo($this->directory, $binary);
+
+                break;
+            }
+        }
 
         $zip->close();
 
