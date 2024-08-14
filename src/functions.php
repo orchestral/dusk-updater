@@ -23,12 +23,11 @@ function rename_chromedriver_binary(string $binary, string $operatingSystem): st
 /**
  * Download from URL.
  *
- *
  * @throws \Exception
  */
 function download(string $url, string $destination, ?string $proxy = null, bool $verifySsl = true): void
 {
-    $client = new Client();
+    $client = new Client;
 
     $resource = Utils::tryFopen($destination, 'w');
 
@@ -47,12 +46,11 @@ function download(string $url, string $destination, ?string $proxy = null, bool 
 /**
  * Get contents from URL.
  *
- *
  * @throws \Exception
  */
 function fetch(string $url, ?string $proxy = null, bool $verifySsl = true): string
 {
-    $client = new Client();
+    $client = new Client;
 
     $response = $client->get($url, array_merge([
         'verify' => $verifySsl,

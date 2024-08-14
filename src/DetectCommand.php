@@ -19,6 +19,7 @@ class DetectCommand extends Command
     /**
      * Configure the command options.
      */
+    #[\Override]
     protected function configure(): void
     {
         $this->addOption('chrome-dir', null, InputOption::VALUE_OPTIONAL, 'Detect the installed Chrome/Chromium version, optionally in a custom path')
@@ -32,6 +33,7 @@ class DetectCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -50,7 +52,7 @@ class DetectCommand extends Command
             isset($chromeVersions['semver']) ? $chromeVersions['semver'] : ''
         );
 
-        $io->block(sprintf('Running PHP %s on Platform [%s]', PHP_VERSION, $currentOS));
+        $io->block(\sprintf('Running PHP %s on Platform [%s]', PHP_VERSION, $currentOS));
 
         $io->table(['Tool', 'Version'], [
             ['Chrome/Chromium', $chromeVersions['semver'] ?? '<fg=yellow>✖ N/A</>'],

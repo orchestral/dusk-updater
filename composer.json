@@ -21,7 +21,7 @@
             "Orchestra\\DuskUpdater\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/functions.php"
         ]
     },
     "autoload-dev": {
@@ -34,31 +34,34 @@
         "ext-openssl": "*",
         "ext-zip": "*",
         "composer-runtime-api": "^2.2",
-        "composer/semver": "^1.5 || ^3.0",
-        "guzzlehttp/guzzle": "^7.8",
-        "symfony/console": "^6.4 || ^7.0",
+        "composer/semver": "^3.0",
+        "guzzlehttp/guzzle": "^7.9",
+        "symfony/console": "^7.0",
         "symfony/polyfill-ctype": "^1.28",
-        "symfony/process": "^6.4 || ^7.0"
+        "symfony/process": "^7.0"
     },
     "require-dev": {
-        "laravel/pint": "^1.4",
-        "phpstan/phpstan": "^1.10.7",
+        "laravel/dusk": "^8.0",
+        "laravel/pint": "^1.17",
+        "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^10.1"
+    },
+    "conflict": {
+        "laravel/dusk": "<8.0.0 || >=9.0.0"
     },
     "config": {
         "sort-packages": true
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        }
-    },
     "scripts": {
-        "ci": [
-            "@php vendor/bin/phpstan analyse",
-            "@php vendor/bin/pint"
+        "lint": [
+            "@php vendor/bin/pint",
+            "@php vendor/bin/phpstan analyse --verbose"
         ],
-        "test": "@php vendor/bin/phpunit -c ./ --color"
+        "test": "@php vendor/bin/phpunit -c ./ --color",
+        "ci": [
+            "@lint",
+            "@test"
+        ]
     },
     "prefer-stable": true,
     "minimum-stability": "dev"

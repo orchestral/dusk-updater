@@ -20,6 +20,7 @@ class UpdateCommand extends Command
     /**
      * Configure the command options.
      */
+    #[\Override]
     protected function configure(): void
     {
         $this->addArgument('version', InputArgument::OPTIONAL)
@@ -33,6 +34,7 @@ class UpdateCommand extends Command
      *
      * @return int 0 if everything went fine, or an exit code
      */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $version = $this->version($input);
@@ -47,7 +49,7 @@ class UpdateCommand extends Command
             }
         }
 
-        $output->writeln(sprintf(
+        $output->writeln(\sprintf(
             '<info>ChromeDriver %s successfully installed for version %s.</info>', $all ? 'binaries' : 'binary', $version
         ));
 
@@ -91,13 +93,26 @@ class UpdateCommand extends Command
             throw new RuntimeException("Unable to extract {$archive} without --install-dir");
         }
 
-        $zip = new ZipArchive();
+        $binary = null;
+
+        $zip = new ZipArchive;
 
         $zip->open($archive);
 
         $zip->extractTo($this->directory);
 
-        $binary = $zip->getNameIndex(version_compare($version, '115.0', '<') ? 0 : 1);
+        for ($fileIndex = 0; $fileIndex < $zip->numFiles; $fileIndex++) {
+            /** @var string $filename */
+            $filename = $zip->getNameIndex($fileIndex);
+
+            if (str_starts_with(basename($filename), 'chromedriver')) {
+                $binary = $filename;
+
+                $zip->extractTo($this->directory, $binary);
+
+                break;
+            }
+        }
 
         $zip->close();
 

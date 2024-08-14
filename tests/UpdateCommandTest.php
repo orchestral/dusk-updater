@@ -15,7 +15,7 @@ class UpdateCommandTest extends TestCase
     public function it_can_update_to_specific_version()
     {
         $app = new Application('Dusk Updater', '1.0.0');
-        $app->add(new UpdateCommand());
+        $app->add(new UpdateCommand);
 
         $command = $app->find('update');
 
@@ -40,7 +40,7 @@ class UpdateCommandTest extends TestCase
     public function it_can_update_to_major_version()
     {
         $app = new Application('Dusk Updater', '1.0.0');
-        $app->add(new UpdateCommand());
+        $app->add(new UpdateCommand);
 
         $command = $app->find('update');
 
@@ -62,7 +62,7 @@ class UpdateCommandTest extends TestCase
         $this->expectExceptionMessage('Unable to retrieve ChromeDriver [74.0.3729].');
 
         $app = new Application('Dusk Updater', '1.0.0');
-        $app->add(new UpdateCommand());
+        $app->add(new UpdateCommand);
 
         $command = $app->find('update');
 
