@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.6.0
+
+Released: 2024-08-14
+
+### Changes
+
+* Extract chromedriver regardless of position in archive by @aleahy in [#13](https://github.com/orchestral/dusk-updater/pull/13).
+
+<!--
+#### New Contributors
+* @aleahy made their first contribution in https://github.com/orchestral/dusk-updater/pull/13
+-->
+
 ## 2.5.0
 
 Released: 2024-07-24
