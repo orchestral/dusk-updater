@@ -3,7 +3,6 @@
 /vendor/*
 
 # PHPUnit
-/tests/tmp/*
 /coverage/*
 /.phpunit.cache/*
 /.phpunit.result.cache
