@@ -8,7 +8,7 @@ Released: 2024-08-14
 
 ### Changes
 
-* Extract chromedriver regardless of position in archive by @ in [#13](https://github.com/orchestral/dusk-updater/pull/13).
+* Extract chromedriver regardless of position in archive by @aleahy in [#13](https://github.com/orchestral/dusk-updater/pull/13).
 
 <!--
 #### New Contributors
