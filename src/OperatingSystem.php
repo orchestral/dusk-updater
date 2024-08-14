@@ -11,7 +11,7 @@ class OperatingSystem
      *
      * @var array<string, array{slug: string, binary: string, commands: array<int, string>}>
      */
-    protected static $platforms = [
+    protected static array $platforms = [
         'linux' => [
             'slug' => 'linux64',
             'binary' => 'chromedriver-linux',
