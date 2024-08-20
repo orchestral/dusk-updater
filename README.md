@@ -25,15 +25,15 @@ Supports all versions of Laravel Dusk especially those used outside of Laravel i
 
 Download the latest stable ChromeDriver release:
 
-    ./vendor/bin/dusk-updater update
+    php vendor/bin/dusk-updater update
 
 You can also specify the major Chrome/Chromium version you are using:
 
-    ./vendor/bin/dusk-updater update 109
+    php vendor/bin/dusk-updater update 109
 
 Or you directly specify the desired ChromeDriver version:
 
-    ./vendor/bin/dusk-updater update 109.0.5414.74
+    php vendor/bin/dusk-updater update 109.0.5414.74
 
 > If Dusk is still using the previous version after the update, there is probably an old ChromeDriver process running that you need to terminate first. 
 
@@ -41,14 +41,14 @@ Or you directly specify the desired ChromeDriver version:
 
 You can check if the installed Chrome and ChromeDriver version using:
 
-    ./vendor/bin/dusk-updater detect
+    php vendor/bin/dusk-updater detect
 
 > The command will prompt you to download a new ChromeDriver if it is outdated.
 
 Specify the absolute path to your custom Chrome/Chromium installation (not supported on Windows):
 
-    ./vendor/bin/dusk-updater detect --chrome-dir=/usr/bin/google-chrome
+    php vendor/bin/dusk-updater detect --chrome-dir=/usr/bin/google-chrome
 
 Finally, you can also tell the command to automatically download a new version if it is outdated using:
 
-    ./vendor/bin/dusk-updater detect --auto-update
+    php vendor/bin/dusk-updater detect --auto-update
