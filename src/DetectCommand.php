@@ -16,9 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'detect', description: 'Detect the installed Chrome/Chromium version.')]
 class DetectCommand extends Command
 {
-    /**
-     * Configure the command options.
-     */
+    /** {@inheritDoc */
     #[\Override]
     protected function configure(): void
     {
@@ -30,11 +28,7 @@ class DetectCommand extends Command
         parent::configure();
     }
 
-    /**
-     * Execute the command.
-     *
-     * @return int 0 if everything went fine, or an exit code
-     */
+    /** {@inheritDoc */
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

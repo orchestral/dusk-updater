@@ -115,9 +115,7 @@ trait DetectsChromeVersion
                 continue;
             }
 
-            preg_match('/(\d+)\.(\d+)\.(\d+)(\.\d+)?/', $process->getOutput(), $matches);
-
-            if (! isset($matches[1])) {
+            if (preg_match('/(\d+)\.(\d+)\.(\d+)(\.\d+)?/', $process->getOutput(), $matches) === false) {
                 continue;
             }
 
@@ -161,10 +159,7 @@ trait DetectsChromeVersion
         $process->run();
 
         if ($process->getExitCode() == 0) {
-            preg_match('/ChromeDriver\s(\d+)\.(\d+)\.(\d+)(\.\d+)?\s[\w\D]+/', $process->getOutput(), $matches);
-
-            if (isset($matches[1])) {
-                /** @var array{0: string, 1: string, 2: string, 3: string} $matches */
+            if (preg_match('/ChromeDriver\s(\d+)\.(\d+)\.(\d+)(\.\d+)?\s[\w\D]+/', $process->getOutput(), $matches) !== false) {
                 $semver = implode('.', [$matches[1], $matches[2], $matches[3]]);
 
                 return [

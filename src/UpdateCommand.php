@@ -17,9 +17,7 @@ use ZipArchive;
 #[AsCommand(name: 'update', description: 'Install the ChromeDriver binary.')]
 class UpdateCommand extends Command
 {
-    /**
-     * Configure the command options.
-     */
+    /** {@inheritDoc */
     #[\Override]
     protected function configure(): void
     {
@@ -31,11 +29,7 @@ class UpdateCommand extends Command
         parent::configure();
     }
 
-    /**
-     * Execute the command.
-     *
-     * @return int 0 if everything went fine, or an exit code
-     */
+    /** {@inheritDoc */
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

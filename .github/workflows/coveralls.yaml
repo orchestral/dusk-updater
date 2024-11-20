@@ -10,14 +10,11 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        php:
-          - 8.2
-        dependencies:
-          - "highest"
+        php: [8.3]
         experimental:
           - false
 
-    name: PHP${{ matrix.php }} on ${{ matrix.os }} (${{ matrix.dependencies }})
+    name: PHP:${{ matrix.php }} Code Coverage
 
     steps:
       - name: Checkout code
@@ -33,7 +30,7 @@ jobs:
       - name: Install dependencies
         uses: "ramsey/composer-install@v3"
         with:
-          dependency-versions: "${{ matrix.dependencies }}"
+          dependency-versions: "highest"
           composer-options: "--prefer-dist --prefer-stable"
 
       - name: Installed dependencies
