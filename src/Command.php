@@ -33,11 +33,8 @@ class Command extends SymfonyCommand
      */
     protected $withSslVerification = true;
 
-    /**
-     * Configure the command options.
-     *
-     * @return void
-     */
+    /** {@inheritDoc */
+    #[\Override]
     protected function configure()
     {
         $this->ignoreValidationErrors();
@@ -54,18 +51,8 @@ class Command extends SymfonyCommand
             ->addOption('ssl-no-verify', null, InputOption::VALUE_NONE, 'Bypass SSL certificate verification when installing through a proxy');
     }
 
-    /**
-     * Initializes the command after the input has been bound and before the input
-     * is validated.
-     *
-     * This is mainly useful when a lot of commands extends one main command
-     * where some things need to be initialized based on the input arguments and options.
-     *
-     * @see InputInterface::bind()
-     * @see InputInterface::validate()
-     *
-     * @return void
-     */
+    /** {@inheritDoc */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->directory = $input->getOption('install-dir');

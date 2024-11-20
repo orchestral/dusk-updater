@@ -16,11 +16,8 @@ use ZipArchive;
  */
 class UpdateCommand extends Command
 {
-    /**
-     * Configure the command options.
-     *
-     * @return void
-     */
+    /** {@inheritDoc */
+    #[\Override]
     protected function configure()
     {
         $this->setName('update')
@@ -31,11 +28,8 @@ class UpdateCommand extends Command
         parent::configure();
     }
 
-    /**
-     * Execute the command.
-     *
-     * @return int 0 if everything went fine, or an exit code
-     */
+    /** {@inheritDoc */
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $version = $this->version($input);
