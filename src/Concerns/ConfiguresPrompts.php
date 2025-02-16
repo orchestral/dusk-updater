@@ -28,7 +28,7 @@ trait ConfiguresPrompts
         $enabled = true;
 
         if (isset($_ENV['PROMPTS_ENABLED'])) {
-            $enabled = in_array($_ENV['PROMPTS_ENABLED'], [true, 'true']);
+            $enabled = \in_array($_ENV['PROMPTS_ENABLED'], [true, 'true']);
         }
 
         Prompt::fallbackWhen(! $input->isInteractive() || PHP_OS_FAMILY === 'Windows' || $enabled == false);
