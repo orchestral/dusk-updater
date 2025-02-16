@@ -3,6 +3,8 @@
 namespace Orchestra\DuskUpdater;
 
 use Composer\Semver\Comparator;
+use Orchestra\DuskUpdaterApi\ChromeVersionFinder;
+use Orchestra\DuskUpdaterApi\OperatingSystem;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,6 +32,7 @@ class DetectCommand extends Command
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $finder = new ChromeVersionFinder;
         $io = new SymfonyStyle($input, $output);
 
         $chromeDirectory = $input->getOption('chrome-dir');
@@ -38,8 +41,8 @@ class DetectCommand extends Command
 
         $currentOS = OperatingSystem::id();
 
-        $chromeVersions = $this->installedChromeVersion($currentOS, $chromeDirectory);
-        $driverVersions = $this->installedChromeDriverVersion($currentOS, (string) $driverDirectory);
+        $chromeVersions = $finder->installedChromeVersion($currentOS, $chromeDirectory);
+        $driverVersions = $finder->installedChromeDriverVersion($currentOS, (string) $driverDirectory);
 
         $updated = Comparator::equalTo(
             isset($driverVersions['semver']) ? $driverVersions['semver'] : '',

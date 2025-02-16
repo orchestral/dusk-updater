@@ -26,7 +26,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Orchestra\\DuskUpdater\\Tests\\": "tests/"
+            "Tests\\": "tests/"
         }
     },
     "require": {
@@ -36,28 +36,31 @@
         "composer-runtime-api": "^2.2",
         "composer/semver": "^3.0",
         "guzzlehttp/guzzle": "^7.9",
+        "orchestra/dusk-updater-api": "^1.0",
         "symfony/console": "^7.0",
-        "symfony/polyfill-ctype": "^1.28",
         "symfony/process": "^7.0"
     },
     "require-dev": {
         "laravel/dusk": "^8.0",
-        "laravel/pint": "^1.17",
-        "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^11.0"
+        "laravel/pint": "^1.20",
+        "pestphp/pest": "^3.0",
+        "phpstan/phpstan": "^2.1"
     },
     "conflict": {
         "laravel/dusk": "<8.0.0 || >=9.0.0"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "scripts": {
         "lint": [
             "@php vendor/bin/pint",
             "@php vendor/bin/phpstan analyse --verbose"
         ],
-        "test": "@php vendor/bin/phpunit -c ./ --color",
+        "test": "@php vendor/bin/pest",
         "ci": [
             "@lint",
             "@test"
