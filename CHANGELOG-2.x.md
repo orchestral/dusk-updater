@@ -2,6 +2,16 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.7.0
+
+Released: 2025-02-16
+
+### Changes
+
+* Use `orchestra/dusk-updater-api`.
+
+### Changes
+
 ## 2.6.0
 
 Released: 2024-08-14
