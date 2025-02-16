@@ -26,7 +26,7 @@ class DownloadChromeDriver
         $archive = $this->directory.DIRECTORY_SEPARATOR.'chromedriver.zip';
 
         try {
-            HttpClient::download($url, $archive);
+            (new HttpClient)->download($url, $archive);
         } catch (Exception $e) {
             throw new RuntimeException(sprintf('Unable to retrieve ChromeDriver [%s].', $this->version));
         }
