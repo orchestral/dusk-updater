@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'update', description: 'Install the ChromeDriver binary')]
 class UpdateCommand extends Command
 {
-    /** {@inheritDoc */
+    /** {@inheritDoc} */
     #[\Override]
     protected function configure(): void
     {
@@ -27,7 +27,7 @@ class UpdateCommand extends Command
         parent::configure();
     }
 
-    /** {@inheritDoc */
+    /** {@inheritDoc} */
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
