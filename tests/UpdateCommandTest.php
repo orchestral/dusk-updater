@@ -2,8 +2,8 @@
 
 namespace Orchestra\DuskUpdater\Tests;
 
-use Orchestra\DuskUpdater\OperatingSystem;
 use Orchestra\DuskUpdater\UpdateCommand;
+use Orchestra\DuskUpdaterApi\OperatingSystem;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
