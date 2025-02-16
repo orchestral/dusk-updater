@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 3.0.1
+
+Released: 2025-02-16
+
+### Changes
+
+* Allows Symfony Components versions `^6.2` and `^7.0`.
+
 ## 3.0.0
 
 Released: 2025-02-16
