@@ -15,7 +15,7 @@ class Command extends SymfonyCommand
      */
     protected ?string $directory;
 
-    /** {@inheritDoc */
+    /** {@inheritDoc} */
     #[\Override]
     protected function configure(): void
     {
@@ -33,7 +33,7 @@ class Command extends SymfonyCommand
             ->addOption('ssl-no-verify', null, InputOption::VALUE_NONE, 'Bypass SSL certificate verification when installing through a proxy');
     }
 
-    /** {@inheritDoc */
+    /** {@inheritDoc} */
     #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
