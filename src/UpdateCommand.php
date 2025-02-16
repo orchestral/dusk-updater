@@ -2,7 +2,6 @@
 
 namespace Orchestra\DuskUpdater;
 
-use Exception;
 use Orchestra\DuskUpdaterApi\ChromeVersionFinder;
 use Orchestra\DuskUpdaterApi\OperatingSystem;
 use RuntimeException;
@@ -11,7 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use ZipArchive;
 
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater

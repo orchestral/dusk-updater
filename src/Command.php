@@ -2,7 +2,6 @@
 
 namespace Orchestra\DuskUpdater;
 
-use Exception;
 use Orchestra\DuskUpdaterApi\HttpClient;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;

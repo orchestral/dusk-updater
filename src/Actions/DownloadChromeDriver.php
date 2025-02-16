@@ -14,7 +14,7 @@ class DownloadChromeDriver
     public function __construct(
         public string $directory,
         public string $version,
-    ) { }
+    ) {}
 
     /**
      * Handle the action.
@@ -28,7 +28,7 @@ class DownloadChromeDriver
         try {
             HttpClient::download($url, $archive);
         } catch (Exception $e) {
-            throw new RuntimeException(sprintf('Unable to retrieve ChromeDriver [%s].', $this->version));
+            throw new RuntimeException(\sprintf('Unable to retrieve ChromeDriver [%s].', $this->version));
         }
 
         return $archive;

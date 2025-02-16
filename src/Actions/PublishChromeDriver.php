@@ -2,8 +2,6 @@
 
 namespace Orchestra\DuskUpdater\Actions;
 
-use Exception;
-use RuntimeException;
 use ZipArchive;
 
 use function Orchestra\DuskUpdater\rename_chromedriver_binary;
@@ -16,7 +14,7 @@ class PublishChromeDriver
     public function __construct(
         public string $directory,
         public string $operatingSystem,
-    ) { }
+    ) {}
 
     /**
      * Handle the action.
