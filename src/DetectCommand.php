@@ -10,7 +10,11 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
+
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\intro;
+use function Laravel\Prompts\table;
+use function Laravel\Prompts\warning;
 
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
@@ -33,7 +37,6 @@ class DetectCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $finder = new ChromeVersionFinder;
-        $io = new SymfonyStyle($input, $output);
 
         $chromeDirectory = $input->getOption('chrome-dir');
         $driverDirectory = $input->getOption('install-dir');
@@ -49,19 +52,19 @@ class DetectCommand extends Command
             isset($chromeVersions['semver']) ? $chromeVersions['semver'] : ''
         );
 
-        $io->block(\sprintf('Running PHP %s on Platform [%s]', PHP_VERSION, $currentOS));
+        intro(\sprintf('Running PHP %s on Platform [%s]', PHP_VERSION, $currentOS));
 
-        $io->table(['Tool', 'Version'], [
+        table(['Tool', 'Version'], [
             ['Chrome/Chromium', $chromeVersions['semver'] ?? '<fg=yellow>✖ N/A</>'],
             ['ChromeDriver', $driverVersions['semver'] ?? '<fg=yellow>✖ N/A</>'],
         ]);
 
         if (! $updated) {
             if (! $autoUpdate) {
-                $io->caution('ChromeDriver is outdated!');
+                warning('ChromeDriver is outdated!');
             }
 
-            if ($autoUpdate || $io->confirm('Do you want to update ChromeDriver?')) {
+            if ($autoUpdate || confirm('Do you want to update ChromeDriver?')) {
                 $this->updateChromeDriver($input, $output, $driverDirectory, $chromeVersions['major']);
             }
         }
