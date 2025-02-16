@@ -6,6 +6,8 @@ use Exception;
 use Orchestra\DuskUpdaterApi\HttpClient;
 use RuntimeException;
 
+use function Orchestra\DuskUpdaterApi\join_paths;
+
 class DownloadChromeDriver
 {
     /**
@@ -23,7 +25,7 @@ class DownloadChromeDriver
      */
     public function handle(string $url): string
     {
-        $archive = $this->directory.DIRECTORY_SEPARATOR.'chromedriver.zip';
+        $archive = join_paths($this->directory, 'chromedriver.zip');
 
         try {
             HttpClient::download($url, $archive);

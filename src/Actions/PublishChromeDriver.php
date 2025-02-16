@@ -4,6 +4,7 @@ namespace Orchestra\DuskUpdater\Actions;
 
 use ZipArchive;
 
+use function Orchestra\DuskUpdaterApi\join_paths;
 use function Orchestra\DuskUpdater\rename_chromedriver_binary;
 
 class PublishChromeDriver
@@ -70,8 +71,8 @@ class PublishChromeDriver
     {
         $newName = rename_chromedriver_binary($binary, $this->operatingSystem);
 
-        $from = $this->directory.DIRECTORY_SEPARATOR.$binary;
-        $to = $this->directory.DIRECTORY_SEPARATOR.$newName;
+        $from = join_paths($this->directory, $binary);
+        $to = join_paths($this->directory, $newName);
 
         rename($from, $to);
 
