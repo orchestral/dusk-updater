@@ -18,6 +18,8 @@ use function Laravel\Prompts\warning;
 
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
+ *
+ * @codeCoverageIgnore
  */
 #[AsCommand(name: 'detect', description: 'Detect the installed Chrome/Chromium version')]
 class DetectCommand extends Command

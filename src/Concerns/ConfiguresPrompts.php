@@ -20,6 +20,8 @@ trait ConfiguresPrompts
      * Configure the prompt fallbacks.
      *
      * @return void
+     *
+     * @codeCoverageIgnore
      */
     protected function configurePrompts(InputInterface $input, OutputInterface $output)
     {
@@ -109,6 +111,8 @@ trait ConfiguresPrompts
      * @param  bool|string  $required
      * @param  \Closure|null  $validate
      * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     *
+     * @codeCoverageIgnore
      */
     protected function promptUntilValid($prompt, $required, $validate, $output)
     {
