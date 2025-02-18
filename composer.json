@@ -37,7 +37,7 @@
         "composer/semver": "^1.5 || ^3.0",
         "guzzlehttp/guzzle": "^7.2",
         "orchestra/dusk-updater-api": "^1.0.2",
-        "orchestra/sidekick": "^1.0",
+        "orchestra/sidekick": "^1.0.2",
         "symfony/console": "^6.0 || ^7.0",
         "symfony/polyfill-php83": "^1.31",
         "symfony/process": "^6.0 || ^7.0"
