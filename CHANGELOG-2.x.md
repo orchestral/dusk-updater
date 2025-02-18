@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.7.1
+
+Released: 2025-02-18
+
+### Changes
+
+* Use `orchestra/sidekick`.
+
 ## 2.7.0
 
 Released: 2025-02-16
