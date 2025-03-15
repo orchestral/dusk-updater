@@ -22,7 +22,7 @@ it('can update to specific version', function () {
 
     $output = $commandTester->getDisplay();
 
-    $this->assertStringContainsStringIgnoringLineEndings(
+    $this->assertStringContainsString(
         'ChromeDriver binary successfully installed for version 108.0.5359.71.',
         $output
     );
@@ -42,7 +42,7 @@ it('can update to major version', function () {
     ]);
 
     $output = $commandTester->getDisplay();
-    $this->assertStringContainsStringIgnoringLineEndings(
+    $this->assertStringContainsString(
         'ChromeDriver binary successfully installed for version 108',
         $output
     );
