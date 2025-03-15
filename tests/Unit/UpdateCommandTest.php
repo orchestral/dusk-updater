@@ -23,10 +23,8 @@ it('can update to specific version', function () {
 
     $output = $commandTester->getDisplay();
 
-    $this->assertStringContainsString(
-        OperatingSystem::onWindows()
-            ? 'ChromeDriver binary successfully installed for version 108.0.5359.71.'.PHP_EOL
-            : "ChromeDriver binary successfully installed for version 108.0.5359.71.\n",
+    $this->assertStringContainsStringIgnoringLineEndings(
+        'ChromeDriver binary successfully installed for version 108.0.5359.71.',
         $output
     );
 });
@@ -45,7 +43,10 @@ it('can update to major version', function () {
     ]);
 
     $output = $commandTester->getDisplay();
-    $this->assertStringContainsString('ChromeDriver binary successfully installed for version 108', $output);
+    $this->assertStringContainsStringIgnoringLineEndings(
+        'ChromeDriver binary successfully installed for version 108',
+        $output
+    );
 });
 
 it('cannot update to invalid version', function () {
