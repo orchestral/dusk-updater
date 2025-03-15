@@ -1,6 +1,7 @@
 <?php
 
 use function Orchestra\DuskUpdater\rename_chromedriver_binary;
+use function Orchestra\Sidekick\join_paths;
 
 it('can rename chromedriver binary', function (string $operatingSystem, string $given, string $expected) {
     expect(rename_chromedriver_binary($given, $operatingSystem))->toBe($expected);
@@ -14,5 +15,5 @@ it('can rename chromedriver binary', function (string $operatingSystem, string $
     ['mac-intel', 'chromedriver-115/chromedriver', 'chromedriver-mac-intel'],
     ['mac-arm', 'chromedriver-115/chromedriver', 'chromedriver-mac-arm'],
     ['win', 'chromedriver-115/chromedriver.exe', 'chromedriver-win.exe'],
-    ['win', 'chromedriver-115'.DIRECTORY_SEPARATOR.'chromedriver.exe', 'chromedriver-win.exe'],
+    ['win', join_paths('chromedriver-115', 'chromedriver.exe'), 'chromedriver-win.exe'],
 ]);

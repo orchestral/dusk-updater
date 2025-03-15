@@ -3,7 +3,6 @@
 namespace Orchestra\DuskUpdater\Tests;
 
 use Orchestra\DuskUpdater\UpdateCommand;
-use Orchestra\DuskUpdaterApi\OperatingSystem;
 use RuntimeException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
