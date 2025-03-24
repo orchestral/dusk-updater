@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "orchestra/dusk-updater",
     "description": "Updater for Laravel Dusk ChromeDriver binaries",
     "type": "library",
