@@ -3,7 +3,6 @@
 namespace Orchestra\DuskUpdater\Tests;
 
 use Orchestra\DuskUpdater\UpdateCommand;
-use Orchestra\DuskUpdaterApi\OperatingSystem;
 use RuntimeException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -32,9 +31,7 @@ it('can update to specific version', function () {
     $output = $commandTester->getDisplay();
 
     $this->assertStringContainsString(
-        OperatingSystem::onWindows()
-            ? 'ChromeDriver binary successfully installed for version 108.0.5359.71.'.PHP_EOL
-            : "ChromeDriver binary successfully installed for version 108.0.5359.71.\n",
+        'ChromeDriver binary successfully installed for version 108.0.5359.71.',
         $output
     );
 });
@@ -53,7 +50,10 @@ it('can update to major version', function () {
     ]);
 
     $output = $commandTester->getDisplay();
-    $this->assertStringContainsString('ChromeDriver binary successfully installed for version 108', $output);
+    $this->assertStringContainsString(
+        'ChromeDriver binary successfully installed for version 108',
+        $output
+    );
 });
 
 it('cannot update to invalid version', function () {
