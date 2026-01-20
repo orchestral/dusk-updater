@@ -5,7 +5,7 @@ namespace Orchestra\DuskUpdater\Actions;
 use ZipArchive;
 
 use function Orchestra\DuskUpdater\rename_chromedriver_binary;
-use function Orchestra\Sidekick\join_paths;
+use function Orchestra\Sidekick\Filesystem\join_paths;
 
 class PublishChromeDriver
 {

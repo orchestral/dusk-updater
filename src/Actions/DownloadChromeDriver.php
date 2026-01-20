@@ -6,7 +6,7 @@ use Exception;
 use Orchestra\DuskUpdaterApi\HttpClient;
 use RuntimeException;
 
-use function Orchestra\Sidekick\join_paths;
+use function Orchestra\Sidekick\Filesystem\join_paths;
 
 class DownloadChromeDriver
 {
