@@ -38,9 +38,9 @@
         "guzzlehttp/guzzle": "^7.2",
         "orchestra/dusk-updater-api": "^1.0.3",
         "orchestra/sidekick": "^1.0.2",
-        "symfony/console": "^6.0|^7.0",
+        "symfony/console": "^6.0|^7.0|^8.0",
         "symfony/polyfill-php83": "^1.31",
-        "symfony/process": "^6.0|^7.0"
+        "symfony/process": "^6.0|^7.0|^8.0"
     },
     "require-dev": {
         "laravel/dusk": "^6.0|^7.0|^8.0",

@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Console\Application;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -34,3 +36,9 @@
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
+function addCommand(Application $app, object $command) {
+    $addCommandMethodName = method_exists($app, 'addCommand') ? 'addCommand' : 'add';
+
+    $app->{$addCommandMethodName}($command);
+}

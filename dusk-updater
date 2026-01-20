@@ -7,7 +7,9 @@ $app = new Symfony\Component\Console\Application('Dusk Updater');
 
 $app->setVersion(Composer\InstalledVersions::getPrettyVersion('orchestra/dusk-updater'));
 
-$app->add(new Orchestra\DuskUpdater\DetectCommand());
-$app->add(new Orchestra\DuskUpdater\UpdateCommand());
+$addCommandMethodName = method_exists($app, 'addCommand') ? 'addCommand' : 'add';
+
+$app->{$addCommandMethodName}(new Orchestra\DuskUpdater\DetectCommand());
+$app->{$addCommandMethodName}(new Orchestra\DuskUpdater\UpdateCommand());
 
 $app->run();
