@@ -38,7 +38,7 @@
         "composer/semver": "^3.0",
         "guzzlehttp/guzzle": "^7.9",
         "laravel/prompts": "^0.1.25|^0.2|^0.3",
-        "orchestra/dusk-updater-api": "^1.0.3",
+        "orchestra/dusk-updater-api": "^1.0.4",
         "orchestra/sidekick": "~1.1.23|~1.2.20",
         "symfony/console": "^6.2|^7.0|^8.0",
         "symfony/polyfill-php83": "^1.33",
