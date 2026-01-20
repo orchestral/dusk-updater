@@ -7,6 +7,12 @@ parameters:
 			path: src/Command.php
 
 		-
+			message: '#^Parameter \#1 \$callback of method Symfony\\Component\\Console\\Question\\Question\:\:setAutocompleterCallback\(\) expects \(callable\(string\)\: array\<string\>\)\|null, \(array\<string\>&callable\(\)\: mixed\)\|\(Closure\(string\)\: \(array\<string\>\|Illuminate\\Support\\Collection\<int, string\>\)\) given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command.php
+
+		-
 			message: '#^Unable to resolve the template type TKey in call to function collect$#'
 			identifier: argument.templateType
 			count: 1
