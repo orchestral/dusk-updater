@@ -11,19 +11,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use function Laravel\Prompts\note;
+
 /**
  * @copyright Originally created by Jonas Staudenmeir: https://github.com/staudenmeir/dusk-updater
  */
-#[AsCommand(name: 'update', description: 'Install the ChromeDriver binary.')]
+#[AsCommand(name: 'update', description: 'Install the ChromeDriver binary')]
 class UpdateCommand extends Command
 {
     /** {@inheritDoc} */
     #[\Override]
     protected function configure(): void
     {
-        $this->setName('update')
-            ->setDescription('Install the ChromeDriver binary.')
-            ->addArgument('version', InputArgument::OPTIONAL)
+        $this->addArgument('version', InputArgument::OPTIONAL)
             ->addOption('all', null, InputOption::VALUE_NONE, 'Install a ChromeDriver binary for every OS');
 
         parent::configure();
@@ -51,7 +51,7 @@ class UpdateCommand extends Command
             }
         }
 
-        $output->writeln(\sprintf(
+        note(\sprintf(
             '<info>ChromeDriver %s successfully installed for version %s.</info>', $all ? 'binaries' : 'binary', $version
         ));
 

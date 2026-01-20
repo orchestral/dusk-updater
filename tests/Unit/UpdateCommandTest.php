@@ -7,6 +7,14 @@ use RuntimeException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
+beforeEach(function () {
+    $_ENV['PROMPTS_ENABLED'] = false;
+});
+
+afterEach(function () {
+    unset($_ENV['PROMPTS_ENABLED']);
+});
+
 it('can update to specific version', function () {
     addCommand($app = new Application('Dusk Updater', '1.0.0'), new UpdateCommand);
 

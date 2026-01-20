@@ -10,11 +10,11 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        php: ['8.0']
+        php: [8.3]
         experimental:
           - false
 
-    name: PHP:${{ matrix.php }} Code Coverage
+    name: Code Coverage
 
     steps:
       - name: Checkout code
