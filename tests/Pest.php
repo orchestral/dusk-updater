@@ -37,7 +37,8 @@ use Symfony\Component\Console\Application;
 |
 */
 
-function addCommand(Application $app, object $command) {
+function addCommand(Application $app, object $command)
+{
     $addCommandMethodName = method_exists($app, 'addCommand') ? 'addCommand' : 'add';
 
     $app->{$addCommandMethodName}($command);
