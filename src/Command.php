@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use function Orchestra\Sidekick\Filesystem\join_paths;
+
 class Command extends SymfonyCommand
 {
     use Concerns\ConfiguresPrompts;
@@ -23,7 +25,7 @@ class Command extends SymfonyCommand
     {
         $this->ignoreValidationErrors();
 
-        $directory = getcwd().'/vendor/laravel/dusk/bin/';
+        $directory = join_paths(getcwd(), 'vendor', 'laravel', 'dusk', 'bin').DIRECTORY_SEPARATOR;
 
         if (is_dir($directory)) {
             $this->addOption('install-dir', null, InputOption::VALUE_OPTIONAL, 'Install a ChromeDriver binary in this directory', $directory);
