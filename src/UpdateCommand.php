@@ -32,7 +32,7 @@ class UpdateCommand extends Command
     /**
      * {@inheritDoc}
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -7,7 +7,13 @@ parameters:
 			path: src/Command.php
 
 		-
-			message: '#^Parameter \#1 \$callback of method Symfony\\Component\\Console\\Question\\Question\:\:setAutocompleterCallback\(\) expects \(callable\(string\)\: array\<string\>\)\|null, \(array\<string\>&callable\(\)\: mixed\)\|\(Closure\(string\)\: \(array\<string\>\|Illuminate\\Support\\Collection\<int, string\>\)\) given\.$#'
+			message: '#^Parameter \#1 \$basePath of function Orchestra\\Sidekick\\Filesystem\\join_paths expects string\|null, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Symfony\\Component\\Console\\Question\\Question\:\:setAutocompleterCallback\(\) expects \(callable\(string\)\: array\<string\>\)\|null, \(non\-empty\-list\<string\>&callable\(\)\: mixed\)\|\(Closure\(string\)\: \(array\<string\>\|Illuminate\\Support\\Collection\<int, string\>\)\) given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Command.php
