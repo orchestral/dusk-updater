@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 3.2.0
+
+Released: 2026-10-15
+
+### Changes
+
+* Supports Guzzle 8.0.
+
 ## 3.1.0
 
 Released: 2026-01-20
