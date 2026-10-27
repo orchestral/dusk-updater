@@ -8,8 +8,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 it('can update to specific version', function () {
-    $app = new Application('Dusk Updater', '1.0.0');
-    $app->add(new UpdateCommand);
+    addCommand($app = new Application('Dusk Updater', '1.0.0'), new UpdateCommand);
 
     $command = $app->find('update');
 
@@ -29,8 +28,7 @@ it('can update to specific version', function () {
 });
 
 it('can update to major version', function () {
-    $app = new Application('Dusk Updater', '1.0.0');
-    $app->add(new UpdateCommand);
+    addCommand($app = new Application('Dusk Updater', '1.0.0'), new UpdateCommand);
 
     $command = $app->find('update');
 
@@ -49,8 +47,7 @@ it('can update to major version', function () {
 });
 
 it('cannot update to invalid version', function () {
-    $app = new Application('Dusk Updater', '1.0.0');
-    $app->add(new UpdateCommand);
+    addCommand($app = new Application('Dusk Updater', '1.0.0'), new UpdateCommand);
 
     $command = $app->find('update');
 
