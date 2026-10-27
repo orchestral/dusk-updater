@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/dusk-updater`.
 
+## 2.8.0
+
+Released: 2026-10-27
+
+### Changes
+
+* Allows installing the arm64 ChromeDriver on Linux arm64.
+
 ## 2.7.1
 
 Released: 2025-02-18
