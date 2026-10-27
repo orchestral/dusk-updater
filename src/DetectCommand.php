@@ -5,6 +5,7 @@ namespace Orchestra\DuskUpdater;
 use Composer\Semver\Comparator;
 use Orchestra\DuskUpdaterApi\ChromeVersionFinder;
 use Orchestra\DuskUpdaterApi\OperatingSystem;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -76,7 +77,7 @@ class DetectCommand extends Command
      */
     protected function updateChromeDriver(InputInterface $input, OutputInterface $output, string $directory, int $version): int
     {
-        /** @var \Symfony\Component\Console\Application $console */
+        /** @var Application $console */
         $console = $this->getApplication();
 
         $command = $console->find('update');

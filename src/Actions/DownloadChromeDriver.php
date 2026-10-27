@@ -21,7 +21,7 @@ class DownloadChromeDriver
     /**
      * Handle the action.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function handle(string $url): string
     {

@@ -45,7 +45,7 @@ class UpdateCommand extends Command
 
         foreach (OperatingSystem::all() as $operatingSystem) {
             if ($all || ($operatingSystem === $currentOS)) {
-                if ($all && $os === 'linux-arm' && version_compare($version, '153.0', '<')) {
+                if ($all && $operatingSystem === 'linux-arm' && version_compare($version, '153.0', '<')) {
                     continue;
                 }
 
