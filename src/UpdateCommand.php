@@ -49,6 +49,10 @@ class UpdateCommand extends Command
 
         foreach (OperatingSystem::all() as $operatingSystem) {
             if ($all || ($operatingSystem === $currentOS)) {
+                if ($all && $operatingSystem === 'linux-arm' && version_compare($version, '153.0', '<')) {
+                    continue;
+                }
+
                 $url = $finder->resolveChromeDriverDownloadUrl($version, $operatingSystem);
                 $archive = (new Actions\DownloadChromeDriver($this->directory, $version))->handle($url);
                 $binary = (new Actions\PublishChromeDriver($this->directory, $operatingSystem))->handle($archive);
